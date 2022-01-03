@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'specific_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,9 +45,9 @@ class MyApp extends StatelessWidget {
           children: [
             Row(
               children: [
-                HeaderCard(title: "Men"),
-                HeaderCard(title: "Woman"),
-                HeaderCard(title: "Childs"),
+                const HeaderCard(title: "Men"),
+                const HeaderCard(title: "Woman"),
+                const HeaderCard(title: "Childs"),
               ],
             ),
             Container(
@@ -128,7 +129,7 @@ class HeaderCard extends StatelessWidget {
             ),
             Text(
               title,
-              style: TextStyle(fontSize: 17),
+              style: const TextStyle(fontSize: 17),
             ),
           ],
         ),
@@ -171,7 +172,14 @@ class DrawerItem extends StatelessWidget {
         style: const TextStyle(fontSize: 18),
       ),
       onTap: () {
-        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute<SecondPage>(
+            builder: (BuildContext context) => const SecondPage(
+              planetDetail: {"name": "Test"},
+            ),
+          ),
+        );
       },
     );
   }
