@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
       ),
       home: Scaffold(
-        appBar: const CustomAppBar(),
+        appBar: CustomAppBar(),
         body: ListView(
           children: [
             Row(
