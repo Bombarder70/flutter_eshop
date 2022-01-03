@@ -43,114 +43,37 @@ class MyApp extends StatelessWidget {
         body: ListView(children: [
           Row(
             children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 45,
-                        backgroundColor: Colors.deepOrange[200],
-                        child: ClipOval(
-                          child: CachedNetworkImage(
-                            imageUrl: "https://picsum.photos/250?image=9",
-                            fit: BoxFit.cover,
-                            width: 80,
-                            height: 80,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "Woman",
-                        style: TextStyle(fontSize: 17),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 45,
-                        backgroundColor: Colors.deepOrange[200],
-                        child: ClipOval(
-                          child: CachedNetworkImage(
-                            imageUrl: "https://picsum.photos/250?image=9",
-                            fit: BoxFit.cover,
-                            width: 80,
-                            height: 80,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "Woman",
-                        style: TextStyle(fontSize: 17),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 45,
-                        backgroundColor: Colors.deepOrange[200],
-                        child: ClipOval(
-                          child: CachedNetworkImage(
-                            imageUrl: "https://picsum.photos/250?image=9",
-                            fit: BoxFit.cover,
-                            width: 80,
-                            height: 80,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "Woman",
-                        style: TextStyle(fontSize: 17),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              HeaderCard(),
+              HeaderCard(),
+              HeaderCard(),
             ],
           ),
-          Container(color: Colors.red, height: 175),
+          Container(
+            color: Colors.red,
+            height: 175,
+            margin: EdgeInsets.only(bottom: 10),
+          ),
           Row(
             children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.all(5),
-                  color: Colors.deepOrange[200],
-                  child: Image.network('https://picsum.photos/250?image=9'),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  child: Image.network('https://picsum.photos/250?image=9'),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  child: Image.network('https://picsum.photos/250?image=9'),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  child: Image.network('https://picsum.photos/250?image=9'),
-                ),
-              ),
+              AllCategoriesCard(),
+              AllCategoriesCard(),
+              AllCategoriesCard(),
             ],
-          )
+          ),
+          Row(
+            children: [
+              AllCategoriesCard(),
+              AllCategoriesCard(),
+              AllCategoriesCard(),
+            ],
+          ),
+          Row(
+            children: [
+              AllCategoriesCard(),
+              AllCategoriesCard(),
+              AllCategoriesCard(),
+            ],
+          ),
         ]),
       ),
     );
@@ -238,6 +161,59 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class HeaderCard extends StatelessWidget {
+  const HeaderCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 45,
+              backgroundColor: Colors.deepOrange[200],
+              child: ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: "https://picsum.photos/250?image=9",
+                  fit: BoxFit.cover,
+                  width: 80,
+                  height: 80,
+                ),
+              ),
+            ),
+            Text(
+              "Woman",
+              style: TextStyle(fontSize: 17),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AllCategoriesCard extends StatelessWidget {
+  const AllCategoriesCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        padding: EdgeInsets.all(5),
+        margin: EdgeInsets.all(5),
+        color: Colors.deepOrange[200],
+        child: Image.network('https://picsum.photos/250?image=9'),
+      ),
     );
   }
 }
