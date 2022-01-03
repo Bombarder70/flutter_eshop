@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,24 +12,77 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.pink,
-          primaryColor: Colors.black,
-        ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'eShop',
-              style: TextStyle(
-                color: Colors.black,
-              ),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        primaryColor: Colors.black,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'eShop',
+            style: TextStyle(
+              color: Colors.black,
             ),
-            centerTitle: true,
-            backgroundColor: Colors.white,
-            actions: [],
           ),
-        ));
+          centerTitle: true,
+          backgroundColor: Colors.deepOrange[200],
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              tooltip: 'Search products',
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(Icons.shopping_cart),
+              tooltip: 'Show shopping cart',
+              onPressed: () {},
+            ),
+          ],
+        ),
+        body: ListView(children: [
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 45,
+                      backgroundColor: Colors.deepOrangeAccent,
+                      child: ClipOval(
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftowardsdatascience.com%2F3-numpy-image-transformations-on-baby-yoda-c27c1409b411&psig=AOvVaw0UHZkWX9jrQjNj1wppVyxp&ust=1641294244175000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMjp1cq3lfUCFQAAAAAdAAAAABAJ",
+                          fit: BoxFit.cover,
+                          width: 80,
+                          height: 80,
+                        ),
+                      ),
+                    ),
+                    Text("xxx"),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  child: Text("xxx"),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  child: Text("xxx"),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  child: Text("xxx"),
+                ),
+              ),
+            ],
+          ),
+        ]),
+      ),
+    );
   }
 }
 
