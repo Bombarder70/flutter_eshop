@@ -44,41 +44,83 @@ class MyApp extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 45,
-                      backgroundColor: Colors.deepOrangeAccent,
-                      child: ClipOval(
-                        child: CachedNetworkImage(
-                          imageUrl: "https://picsum.photos/250?image=9",
-                          fit: BoxFit.cover,
-                          width: 80,
-                          height: 80,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 45,
+                        backgroundColor: Colors.deepOrange[200],
+                        child: ClipOval(
+                          child: CachedNetworkImage(
+                            imageUrl: "https://picsum.photos/250?image=9",
+                            fit: BoxFit.cover,
+                            width: 80,
+                            height: 80,
+                          ),
                         ),
                       ),
-                    ),
-                    Text("xxx"),
-                  ],
+                      Text(
+                        "Woman",
+                        style: TextStyle(fontSize: 17),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
                 child: Container(
-                  child: Text("xxx"),
+                  padding: const EdgeInsets.all(5),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 45,
+                        backgroundColor: Colors.deepOrange[200],
+                        child: ClipOval(
+                          child: CachedNetworkImage(
+                            imageUrl: "https://picsum.photos/250?image=9",
+                            fit: BoxFit.cover,
+                            width: 80,
+                            height: 80,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "Woman",
+                        style: TextStyle(fontSize: 17),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
                 child: Container(
-                  child: Text("xxx"),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  child: Text("xxx"),
+                  padding: const EdgeInsets.all(5),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 45,
+                        backgroundColor: Colors.deepOrange[200],
+                        child: ClipOval(
+                          child: CachedNetworkImage(
+                            imageUrl: "https://picsum.photos/250?image=9",
+                            fit: BoxFit.cover,
+                            width: 80,
+                            height: 80,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "Woman",
+                        style: TextStyle(fontSize: 17),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
+          Container(color: Colors.red, height: 175),
         ]),
       ),
     );
