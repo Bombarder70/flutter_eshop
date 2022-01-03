@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'specific_page.dart';
+import 'app_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,28 +20,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'eShop',
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.deepOrange[200],
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.search),
-              tooltip: 'Search products',
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.shopping_cart),
-              tooltip: 'Show shopping cart',
-              onPressed: () {},
-            ),
-          ],
-        ),
+        appBar: const CustomAppBar(),
         body: ListView(
           children: [
             Row(
