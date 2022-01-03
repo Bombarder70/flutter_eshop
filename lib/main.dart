@@ -51,8 +51,7 @@ class MyApp extends StatelessWidget {
                       backgroundColor: Colors.deepOrangeAccent,
                       child: ClipOval(
                         child: CachedNetworkImage(
-                          imageUrl:
-                              "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftowardsdatascience.com%2F3-numpy-image-transformations-on-baby-yoda-c27c1409b411&psig=AOvVaw0UHZkWX9jrQjNj1wppVyxp&ust=1641294244175000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMjp1cq3lfUCFQAAAAAdAAAAABAJ",
+                          imageUrl: "https://picsum.photos/250?image=9",
                           fit: BoxFit.cover,
                           width: 80,
                           height: 80,
