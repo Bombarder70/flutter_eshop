@@ -121,6 +121,36 @@ class MyApp extends StatelessWidget {
             ],
           ),
           Container(color: Colors.red, height: 175),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.all(5),
+                  color: Colors.deepOrange[200],
+                  child: Image.network('https://picsum.photos/250?image=9'),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  child: Image.network('https://picsum.photos/250?image=9'),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  child: Image.network('https://picsum.photos/250?image=9'),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  child: Image.network('https://picsum.photos/250?image=9'),
+                ),
+              ),
+            ],
+          )
         ]),
       ),
     );
