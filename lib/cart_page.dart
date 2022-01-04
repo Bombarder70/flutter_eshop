@@ -71,50 +71,64 @@ class CartItem extends StatelessWidget {
             margin: const EdgeInsets.all(3),
             child: Image.network('https://picsum.photos/250?image=9'),
           ),
-          Column(
-            children: [
-              Expanded(
-                child: Container(
-                  child: Text(
-                    "Product name",
-                    style: TextStyle(
-                      fontSize: 22,
+          Container(
+            margin: const EdgeInsets.all(7),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    child: Text(
+                      "Product name",
+                      style: TextStyle(
+                        fontSize: 22,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 7),
-                child: Row(
-                  children: [
-                    Text(
-                      "Cena: ",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    Text(
-                      "300€",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ],
+                Container(
+                  margin: EdgeInsets.only(bottom: 7),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Cena: ",
+                        style: TextStyle(fontSize: 18, color: Colors.grey[600]),
+                      ),
+                      Text(
+                        "300€",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
                 ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 7),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Velkost: ",
+                        style: TextStyle(fontSize: 18, color: Colors.grey[600]),
+                      ),
+                      Text(
+                        "L",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.only(left: 5),
+              child: IconButton(
+                color: Colors.red[700],
+                icon: const Icon(Icons.close),
+                tooltip: 'Increase volume by 10',
+                onPressed: () {},
               ),
-              Container(
-                margin: EdgeInsets.only(bottom: 7),
-                child: Row(
-                  children: [
-                    Text(
-                      "Velkost: ",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    Text(
-                      "L",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          )
+            ),
+          ),
         ],
       ),
       decoration: BoxDecoration(
