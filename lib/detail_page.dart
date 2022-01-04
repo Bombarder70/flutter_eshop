@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'app_bar.dart';
+import 'size_picker.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key}) : super(key: key);
@@ -27,6 +29,7 @@ class DetailPageState extends State<DetailPage> {
           ),
           Container(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: Text(
@@ -47,6 +50,44 @@ class DetailPageState extends State<DetailPage> {
                   ),
                 ),
               ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10),
+            alignment: Alignment.center,
+            child: RatingBar(
+              initialRating: 3,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              ratingWidget: RatingWidget(
+                full: Icon(
+                  Icons.star_rate,
+                  color: Colors.deepOrange[200],
+                ),
+                half: Icon(
+                  Icons.star_half,
+                  color: Colors.deepOrange[200],
+                ),
+                empty: Icon(
+                  Icons.star_border_sharp,
+                  color: Colors.deepOrange[200],
+                ),
+              ),
+              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              onRatingUpdate: (rating) {
+                print(rating);
+              },
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: SizeSelector(
+              sizes: ["M", "S"],
+              selectedSize: "M",
+              onSizeSelected: (item) {
+                print(item);
+              },
             ),
           )
         ],
