@@ -13,7 +13,43 @@ class DetailPageState extends State<DetailPage> {
     return Scaffold(
       appBar: CustomAppBar(),
       body: ListView(
-        children: [],
+        children: [
+          Container(
+            height: 400,
+            child: Image.network('https://picsum.photos/250?image=9'),
+          ),
+          Container(
+            alignment: Alignment.center,
+            child: Text(
+              "Name of product",
+              style: TextStyle(fontSize: 26),
+            ),
+          ),
+          Container(
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "xxx",
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    "xxx",
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    "xxx",
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
