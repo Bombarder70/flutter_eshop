@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_bar.dart';
+import 'detail_page.dart';
 
 class SecondPage extends StatefulWidget {
   final Map planetDetail;
@@ -93,46 +94,56 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        margin: EdgeInsets.all(5),
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: Image.network('https://picsum.photos/250?image=9'),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute<DetailPage>(
+              builder: (BuildContext context) => const DetailPage(),
             ),
-            Text(
-              "Name of product",
-              style: TextStyle(
-                fontSize: 20,
+          );
+        },
+        child: Container(
+          margin: EdgeInsets.all(5),
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: Image.network('https://picsum.photos/250?image=9'),
               ),
-            ),
-            Text(
-              "560€",
-              style: TextStyle(
-                fontSize: 20,
+              Text(
+                "Name of product",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
               ),
-            ),
-            Text(
-              "-50%",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.green,
+              Text(
+                "560€",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
               ),
-            ),
-          ],
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
+              Text(
+                "-50%",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.green,
+                ),
+              ),
+            ],
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
         ),
       ),
     );
