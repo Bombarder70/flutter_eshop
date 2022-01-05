@@ -4,6 +4,7 @@ import 'detail_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:loadmore/loadmore.dart';
+import 'product.dart';
 
 class SecondPage extends StatefulWidget {
   final Map planetDetail;
@@ -14,21 +15,21 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
-  List<dynamic> _planets = [];
+  //List<dynamic> _products = [];
   String nextPage = "";
   int loadedPage = 1;
 
-  List<dynamic> _allPlanets = [];
+  List<Result> _allProducts = [];
 
-  void _removeItem(String name) {
+  void _removeItem(int id) {
     setState(() {
-      _planets.removeWhere((item) => item['name'] == name);
+      _allProducts.removeWhere((item) => item.id == id);
     });
   }
 
-  void mergeData(planets) {
-    _allPlanets.addAll(planets);
-  }
+  /*void mergeData(Result planets) {
+    _allProducts.addAll(planets);
+  }*/
 
   Future<bool> _loadMore() async {
     await Future.delayed(const Duration(seconds: 0, milliseconds: 500));
@@ -42,25 +43,19 @@ class _SecondPageState extends State<SecondPage> {
         "http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=vsetky_produkty");
     var res = await http.get(url);
 
-    // Sting sa Decoduje do pola
-    final Map dataMap = convert.jsonDecode(res.body);
+    var json = convert.jsonDecode(res.body) as Map<String, dynamic>;
+    var products = Product.fromJson(json);
 
-    var results = dataMap['results'];
-
-    if (dataMap['next'] != null) {
-      nextPage = dataMap['next'];
-    } else {
-      nextPage = "stop";
-    }
     nextPage = "stop";
-    if (loadedPage > 1) {
+
+    /*if (loadedPage > 1) {
       mergeData(results);
     } else {
       _allPlanets = results;
-    }
-    print(results);
+    }*/
+
     setState(() {
-      _planets = _allPlanets;
+      _allProducts = products.results;
     });
   }
 
@@ -83,7 +78,7 @@ class _SecondPageState extends State<SecondPage> {
         onLoadMore: _loadMore,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: _planets.length,
+          itemCount: _allProducts.length,
           physics: const AlwaysScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return Card(
@@ -93,7 +88,7 @@ class _SecondPageState extends State<SecondPage> {
                     context,
                     MaterialPageRoute<SecondPage>(
                       builder: (BuildContext context) => SecondPage(
-                        planetDetail: _planets[index],
+                        planetDetail: _allProducts,
                       ),
                     ),
                   ),
