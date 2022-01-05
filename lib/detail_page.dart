@@ -21,13 +21,7 @@ class DetailPageState extends State<DetailPage> {
             height: 400,
             child: Image.network('https://picsum.photos/250?image=9'),
           ),
-          Container(
-            alignment: Alignment.center,
-            child: Text(
-              "Name of product",
-              style: TextStyle(fontSize: 26),
-            ),
-          ),
+          const Heading(title: "Názov produktu"),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -81,6 +75,7 @@ class DetailPageState extends State<DetailPage> {
               },
             ),
           ),
+          const Heading(title: "Veľkosť produktu"),
           Container(
             margin: const EdgeInsets.all(10),
             child: SizeSelector(
@@ -91,21 +86,39 @@ class DetailPageState extends State<DetailPage> {
               },
             ),
           ),
+          const Heading(title: "Farba produktu"),
           Container(
-              alignment: Alignment.bottomCenter,
-              padding: const EdgeInsets.only(left: 50),
-              child: MaterialColorPicker(
-                onColorChange: (Color color) {
-                  // Handle color changes
-                },
-                selectedColor: Colors.red,
-                colors: [
-                  Colors.red,
-                  Colors.deepOrange,
-                  Colors.yellow,
-                  Colors.lightGreen
-                ],
-              ))
+            alignment: Alignment.bottomCenter,
+            padding: const EdgeInsets.only(left: 50),
+            child: MaterialColorPicker(
+              onColorChange: (Color color) {
+                // Handle color changes
+              },
+              selectedColor: Colors.red,
+              colors: [
+                Colors.red,
+                Colors.deepOrange,
+                Colors.yellow,
+                Colors.lightGreen
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(10),
+            color: Colors.deepOrange[200],
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: const Heading(title: "Popis produktu"),
+                ),
+                const Text(
+                  "Etiam iaculis pellentesque dolor, quis sagittis eros dictum sed. Curabitur eu augue sapien. In hac habitasse platea dictumst. Ut sollicitudin sagittis felis, ac ornare neque. Quisque vel libero augue. Donec placerat rhoncus rhoncus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam porta, turpis ut scelerisque pulvinar, odio erat tempus felis, at varius nibh ex at velit. Nunc interdum nunc at mi lacinia, ac rutrum justo vulputate. Curabitur consectetur, ante sed interdum accumsan, risus lacus tincidunt felis, non pellentesque purus sem at neque. Cras in faucibus tellus, eu placerat erat. Cras a purus justo. ",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -145,6 +158,27 @@ class FilterItem extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class Heading extends StatelessWidget {
+  final String title;
+
+  const Heading({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      margin: const EdgeInsets.all(10),
+      child: Text(
+        title,
+        style: const TextStyle(fontSize: 26),
       ),
     );
   }
