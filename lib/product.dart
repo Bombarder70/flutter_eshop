@@ -1,21 +1,21 @@
 // To parse this JSON data, do
 //
-//     final planet = planetFromJson(jsonString);
+//     final Product = ProductFromJson(jsonString);
 
 import 'dart:convert';
 
-Planet planetFromJson(String str) => Planet.fromJson(json.decode(str));
+Product ProductFromJson(String str) => Product.fromJson(json.decode(str));
 
-String planetToJson(Planet data) => json.encode(data.toJson());
+String ProductToJson(Product data) => json.encode(data.toJson());
 
-class Planet {
-  Planet({
+class Product {
+  Product({
     required this.results,
   });
 
   List<Result> results;
 
-  factory Planet.fromJson(Map<String, dynamic> json) => Planet(
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
         results:
             List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
       );
