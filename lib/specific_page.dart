@@ -1,16 +1,81 @@
 import 'package:flutter/material.dart';
 import 'app_bar.dart';
 import 'detail_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+import 'package:loadmore/loadmore.dart';
 
 class SecondPage extends StatefulWidget {
   final Map planetDetail;
 
   const SecondPage({Key? key, required this.planetDetail}) : super(key: key);
   @override
-  State<StatefulWidget> createState() => SecondPageState();
+  State<SecondPage> createState() => _SecondPageState();
 }
 
-class SecondPageState extends State<SecondPage> {
+class _SecondPageState extends State<SecondPage> {
+  List<dynamic> _planets = [];
+  String nextPage = "";
+  int loadedPage = 1;
+
+  List<dynamic> _allPlanets = [];
+
+  void _removeItem(String name) {
+    setState(() {
+      _planets.removeWhere((item) => item['name'] == name);
+    });
+  }
+
+  String loadUrl() {
+    String url;
+    if (_planets.length > 0 && nextPage != "") {
+      loadedPage++;
+
+      url = nextPage;
+    } else {
+      url = "https://swapi.dev/api/planets/";
+    }
+
+    return url;
+  }
+
+  void mergeData(planets) {
+    _allPlanets.addAll(planets);
+  }
+
+  Future<bool> _loadMore() async {
+    await Future.delayed(const Duration(seconds: 0, milliseconds: 500));
+    _loadData();
+
+    return true;
+  }
+
+  void _loadData() async {
+    var url = Uri.parse(loadUrl());
+    var res = await http.get(url);
+
+    // Sting sa Decoduje do pola
+    final Map dataMap = convert.jsonDecode(res.body);
+
+    var results = dataMap['results'];
+
+    if (dataMap['next'] != null) {
+      nextPage = dataMap['next'];
+    } else {
+      nextPage = "stop";
+    }
+
+    if (loadedPage > 1) {
+      mergeData(results);
+    } else {
+      _allPlanets = results;
+    }
+    print(results);
+    setState(() {
+      _planets = _allPlanets;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,18 +92,34 @@ class SecondPageState extends State<SecondPage> {
             ),
           ),
           Divider(color: Colors.black),
-          Row(
-            children: [
-              ProductCard(title: "xxx"),
-              ProductCard(title: "xxx"),
-            ],
+          LoadMore(
+            isFinish: nextPage == "stop",
+            onLoadMore: _loadMore,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: _planets.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<SecondPage>(
+                        builder: (BuildContext context) => SecondPage(
+                          planetDetail: _planets[index],
+                        ),
+                      ),
+                    ),
+                  },
+                  child: Row(
+                    children: [
+                      ProductCard(title: "xxx"),
+                      ProductCard(title: "xxx"),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
-          Row(
-            children: [
-              ProductCard(title: "xxx"),
-              ProductCard(title: "xxx"),
-            ],
-          )
         ],
       ),
     );
