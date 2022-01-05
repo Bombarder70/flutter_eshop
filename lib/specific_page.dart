@@ -26,19 +26,6 @@ class _SecondPageState extends State<SecondPage> {
     });
   }
 
-  String loadUrl() {
-    String url;
-    if (_planets.length > 0 && nextPage != "") {
-      loadedPage++;
-
-      url = nextPage;
-    } else {
-      url = "https://swapi.dev/api/planets/";
-    }
-
-    return url;
-  }
-
   void mergeData(planets) {
     _allPlanets.addAll(planets);
   }
@@ -51,7 +38,8 @@ class _SecondPageState extends State<SecondPage> {
   }
 
   void _loadData() async {
-    var url = Uri.parse(loadUrl());
+    var url = Uri.parse(
+        "http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=vsetky_produkty");
     var res = await http.get(url);
 
     // Sting sa Decoduje do pola
@@ -64,7 +52,7 @@ class _SecondPageState extends State<SecondPage> {
     } else {
       nextPage = "stop";
     }
-
+    nextPage = "stop";
     if (loadedPage > 1) {
       mergeData(results);
     } else {
@@ -76,13 +64,7 @@ class _SecondPageState extends State<SecondPage> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(),
-      body: ListView(
-        children: [
-          Container(
+  /*Container(
             padding: const EdgeInsets.all(10),
             child: Row(
               children: [
@@ -90,37 +72,42 @@ class _SecondPageState extends State<SecondPage> {
                 FilterItem(title: "Filtrovať", icon: Icons.filter_alt),
               ],
             ),
-          ),
-          Divider(color: Colors.black),
-          LoadMore(
-            isFinish: nextPage == "stop",
-            onLoadMore: _loadMore,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: _planets.length,
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute<SecondPage>(
-                        builder: (BuildContext context) => SecondPage(
-                          planetDetail: _planets[index],
-                        ),
+          ),*/
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(),
+      body: LoadMore(
+        isFinish: nextPage == "stop",
+        onLoadMore: _loadMore,
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: _planets.length,
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return Card(
+              child: InkWell(
+                onTap: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<SecondPage>(
+                      builder: (BuildContext context) => SecondPage(
+                        planetDetail: _planets[index],
                       ),
                     ),
-                  },
-                  child: Row(
-                    children: [
-                      ProductCard(title: "xxx"),
-                      ProductCard(title: "xxx"),
-                    ],
                   ),
-                );
-              },
-            ),
-          ),
-        ],
+                },
+                child: Row(
+                  children: [
+                    ProductCard(title: "xxx"),
+                    ProductCard(title: "xxx"),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
