@@ -1,3 +1,4 @@
+import 'package:eshop_app/product.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'specific_page.dart';
@@ -155,8 +156,17 @@ class DrawerItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute<SecondPage>(
-            builder: (BuildContext context) => const SecondPage(
-              planetDetail: {"name": "Test"},
+            builder: (BuildContext context) => SecondPage(
+              productDetail: Result(
+                id: "1",
+                image: "xx",
+                name: "xxx",
+                price: "321",
+                available: "1",
+                count: "1",
+                description: "dasdsa",
+                type: "1",
+              ),
             ),
           ),
         );

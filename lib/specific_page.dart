@@ -7,9 +7,9 @@ import 'package:loadmore/loadmore.dart';
 import 'product.dart';
 
 class SecondPage extends StatefulWidget {
-  final Map planetDetail;
+  final Result productDetail;
 
-  const SecondPage({Key? key, required this.planetDetail}) : super(key: key);
+  const SecondPage({Key? key, required this.productDetail}) : super(key: key);
   @override
   State<SecondPage> createState() => _SecondPageState();
 }
@@ -88,7 +88,7 @@ class _SecondPageState extends State<SecondPage> {
                     context,
                     MaterialPageRoute<SecondPage>(
                       builder: (BuildContext context) => SecondPage(
-                        planetDetail: _allProducts,
+                        productDetail: _allProducts[index],
                       ),
                     ),
                   ),
