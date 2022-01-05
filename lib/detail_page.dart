@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'app_bar.dart';
 import 'size_picker.dart';
 
@@ -89,7 +90,22 @@ class DetailPageState extends State<DetailPage> {
                 print(item);
               },
             ),
-          )
+          ),
+          Container(
+              alignment: Alignment.bottomCenter,
+              padding: const EdgeInsets.only(left: 50),
+              child: MaterialColorPicker(
+                onColorChange: (Color color) {
+                  // Handle color changes
+                },
+                selectedColor: Colors.red,
+                colors: [
+                  Colors.red,
+                  Colors.deepOrange,
+                  Colors.yellow,
+                  Colors.lightGreen
+                ],
+              ))
         ],
       ),
     );
