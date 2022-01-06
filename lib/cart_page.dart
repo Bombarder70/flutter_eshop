@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'app_bar.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+import 'cart.dart';
 
 class CartPage extends StatefulWidget {
   final Map planetDetail;
@@ -10,6 +13,45 @@ class CartPage extends StatefulWidget {
 }
 
 class CartPageState extends State<CartPage> {
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  //List<dynamic> _products = [];
+  String nextPage = "";
+  int loadedPage = 1;
+
+  List<Result> _allProducts = [];
+
+  void _removeItem(int id) {
+    setState(() {
+      _allProducts.removeWhere((item) => item.id == id);
+    });
+  }
+
+  void _loadData() async {
+    var url = Uri.parse(
+        "http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=kosik");
+    var res = await http.get(url);
+
+    var json = convert.jsonDecode(res.body) as Map<String, dynamic>;
+    var products = Cart.fromJson(json);
+
+    nextPage = "stop";
+
+    /*if (loadedPage > 1) {
+      mergeData(results);
+    } else {
+      _allPlanets = results;
+    }*/
+
+    setState(() {
+      _allProducts = products.results;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,10 +84,14 @@ class CartPageState extends State<CartPage> {
               ),
             ),
           ),
-          CartItem(title: "xxx"),
-          CartItem(title: "xxx"),
-          CartItem(title: "xxx"),
-          CartItem(title: "xxx"),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: _allProducts.length,
+            physics: const AlwaysScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return CartItem(title: "xxx");
+            },
+          ),
         ],
       ),
     );
