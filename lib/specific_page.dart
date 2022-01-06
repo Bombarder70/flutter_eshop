@@ -161,7 +161,8 @@ class ProductCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute<DetailPage>(
-              builder: (BuildContext context) => const DetailPage(),
+              builder: (BuildContext context) =>
+                  DetailPage(productDetail: productDetail),
             ),
           );
         },
@@ -174,14 +175,14 @@ class ProductCard extends StatelessWidget {
                 child: Image.network('https://picsum.photos/250?image=9'),
               ),
               Text(
-                "Name of product",
-                style: TextStyle(
+                productDetail.name,
+                style: const TextStyle(
                   fontSize: 20,
                 ),
               ),
               Text(
-                "560€",
-                style: TextStyle(
+                productDetail.price + " €",
+                style: const TextStyle(
                   fontSize: 20,
                 ),
               ),

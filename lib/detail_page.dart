@@ -3,9 +3,16 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'app_bar.dart';
 import 'size_picker.dart';
+import 'product.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  final Result productDetail;
+
+  const DetailPage({
+    Key? key,
+    required this.productDetail,
+  }) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => DetailPageState();
 }
@@ -21,14 +28,14 @@ class DetailPageState extends State<DetailPage> {
             height: 400,
             child: Image.network('https://picsum.photos/250?image=9'),
           ),
-          const Heading(title: "Názov produktu"),
+          Heading(title: widget.productDetail.name),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: Text(
-                    "xxx",
+                    widget.productDetail.price,
                     style: TextStyle(fontSize: 24),
                   ),
                 ),
@@ -69,7 +76,7 @@ class DetailPageState extends State<DetailPage> {
                   color: Colors.deepOrange[200],
                 ),
               ),
-              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
               onRatingUpdate: (rating) {
                 print(rating);
               },
