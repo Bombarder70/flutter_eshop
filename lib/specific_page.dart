@@ -21,16 +21,6 @@ class _SecondPageState extends State<SecondPage> {
 
   List<Result> _allProducts = [];
 
-  void _removeItem(int id) {
-    setState(() {
-      _allProducts.removeWhere((item) => item.id == id);
-    });
-  }
-
-  /*void mergeData(Result planets) {
-    _allProducts.addAll(planets);
-  }*/
-
   Future<bool> _loadMore() async {
     await Future.delayed(const Duration(seconds: 0, milliseconds: 500));
     _loadData();
@@ -47,12 +37,6 @@ class _SecondPageState extends State<SecondPage> {
     var products = Product.fromJson(json);
 
     nextPage = "stop";
-
-    /*if (loadedPage > 1) {
-      mergeData(results);
-    } else {
-      _allPlanets = results;
-    }*/
 
     setState(() {
       _allProducts = products.results;
