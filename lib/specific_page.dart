@@ -95,8 +95,7 @@ class _SecondPageState extends State<SecondPage> {
                 },
                 child: Row(
                   children: [
-                    ProductCard(title: "xxx"),
-                    ProductCard(title: "xxx"),
+                    ProductCard(productDetail: _allProducts[index]),
                   ],
                 ),
               ),
@@ -147,11 +146,11 @@ class FilterItem extends StatelessWidget {
 }
 
 class ProductCard extends StatelessWidget {
-  final String title;
+  final Result productDetail;
 
   const ProductCard({
     Key? key,
-    required this.title,
+    required this.productDetail,
   }) : super(key: key);
 
   @override
@@ -167,7 +166,7 @@ class ProductCard extends StatelessWidget {
           );
         },
         child: Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: Column(
             children: [
               Container(
