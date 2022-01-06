@@ -119,15 +119,22 @@ class DetailPageState extends State<DetailPage> {
                   margin: const EdgeInsets.all(10),
                   child: const Heading(title: "Popis produktu"),
                 ),
-                const Text(
-                  "Etiam iaculis pellentesque dolor, quis sagittis eros dictum sed. Curabitur eu augue sapien. In hac habitasse platea dictumst. Ut sollicitudin sagittis felis, ac ornare neque. Quisque vel libero augue. Donec placerat rhoncus rhoncus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam porta, turpis ut scelerisque pulvinar, odio erat tempus felis, at varius nibh ex at velit. Nunc interdum nunc at mi lacinia, ac rutrum justo vulputate. Curabitur consectetur, ante sed interdum accumsan, risus lacus tincidunt felis, non pellentesque purus sem at neque. Cras in faucibus tellus, eu placerat erat. Cras a purus justo. ",
-                  style: TextStyle(fontSize: 16),
+                Text(
+                  widget.productDetail.description,
+                  style: const TextStyle(fontSize: 16),
                 ),
               ],
             ),
           )
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.deepOrange[200],
+        onPressed: () {},
+        icon: const Icon(Icons.shopping_cart),
+        label: const Text('Pridať do košíka'),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
