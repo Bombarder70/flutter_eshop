@@ -81,24 +81,10 @@ class _SecondPageState extends State<SecondPage> {
           itemCount: _allProducts.length,
           physics: const AlwaysScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return Card(
-              child: InkWell(
-                onTap: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<SecondPage>(
-                      builder: (BuildContext context) => SecondPage(
-                        productDetail: _allProducts[index],
-                      ),
-                    ),
-                  ),
-                },
-                child: Row(
-                  children: [
-                    ProductCard(productDetail: _allProducts[index]),
-                  ],
-                ),
-              ),
+            return Row(
+              children: [
+                ProductCard(productDetail: _allProducts[index]),
+              ],
             );
           },
         ),
