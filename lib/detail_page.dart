@@ -5,6 +5,9 @@ import 'app_bar.dart';
 import 'size_picker.dart';
 import 'product.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+
 class DetailPage extends StatefulWidget {
   final Result productDetail;
 
@@ -18,6 +21,22 @@ class DetailPage extends StatefulWidget {
 }
 
 class DetailPageState extends State<DetailPage> {
+  Future<http.Response> _addToCart(String idProduct) async {
+    final res = await http.post(
+      Uri.parse(
+          'http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=pridat_do_kosika'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: convert.jsonEncode(<String, String>{
+        'id_product': idProduct,
+      }),
+    );
+
+    print(res.body);
+    return res;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +149,9 @@ class DetailPageState extends State<DetailPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.deepOrange[200],
-        onPressed: () {},
+        onPressed: () {
+          _addToCart(widget.productDetail.id);
+        },
         icon: const Icon(Icons.shopping_cart),
         label: const Text('Pridať do košíka'),
       ),
