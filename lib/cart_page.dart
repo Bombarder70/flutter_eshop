@@ -23,7 +23,7 @@ class CartPageState extends State<CartPage> {
   String nextPage = "";
   int loadedPage = 1;
 
-  List<Result> _allProducts = [];
+  List<CartResult> _allProducts = [];
 
   void _removeItem(int id) {
     setState(() {
@@ -63,7 +63,7 @@ class CartPageState extends State<CartPage> {
           Container(
             padding: const EdgeInsets.all(10),
             child: Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: Row(
                 children: [
                   Expanded(
@@ -73,7 +73,7 @@ class CartPageState extends State<CartPage> {
                     ),
                   ),
                   Text(
-                    "3 položky ",
+                    _allProducts.length.toString() + " položky ",
                     style: TextStyle(fontSize: 20),
                   ),
                   Text(
@@ -89,7 +89,7 @@ class CartPageState extends State<CartPage> {
             itemCount: _allProducts.length,
             physics: const AlwaysScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return CartItem(title: "xxx");
+              return CartItem(productDetail: _allProducts[index]);
             },
           ),
         ],
@@ -99,11 +99,11 @@ class CartPageState extends State<CartPage> {
 }
 
 class CartItem extends StatelessWidget {
-  final String title;
+  final CartResult productDetail;
 
   const CartItem({
     Key? key,
-    required this.title,
+    required this.productDetail,
   }) : super(key: key);
 
   @override
@@ -124,15 +124,15 @@ class CartItem extends StatelessWidget {
                 Expanded(
                   child: Container(
                     child: Text(
-                      "Product name",
-                      style: TextStyle(
+                      productDetail.name,
+                      style: const TextStyle(
                         fontSize: 22,
                       ),
                     ),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 7),
+                  margin: const EdgeInsets.only(bottom: 7),
                   child: Row(
                     children: [
                       Text(
@@ -140,14 +140,14 @@ class CartItem extends StatelessWidget {
                         style: TextStyle(fontSize: 18, color: Colors.grey[600]),
                       ),
                       Text(
-                        "300€",
-                        style: TextStyle(fontSize: 18),
+                        productDetail.price + " €",
+                        style: const TextStyle(fontSize: 18),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 7),
+                  margin: const EdgeInsets.only(bottom: 7),
                   child: Row(
                     children: [
                       Text(
@@ -156,7 +156,7 @@ class CartItem extends StatelessWidget {
                       ),
                       Text(
                         "L",
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                       ),
                     ],
                   ),
@@ -168,10 +168,10 @@ class CartItem extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(left: 5),
               child: IconButton(
+                onPressed: () => {},
                 color: Colors.red[700],
                 icon: const Icon(Icons.close),
-                tooltip: 'Increase volume by 10',
-                onPressed: () {},
+                tooltip: 'Delete item from cart',
               ),
             ),
           ),
