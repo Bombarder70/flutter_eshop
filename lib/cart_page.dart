@@ -106,6 +106,22 @@ class CartItem extends StatelessWidget {
     required this.productDetail,
   }) : super(key: key);
 
+  Future<http.Response> _removeFromCart(String idProduct) async {
+    final res = await http.post(
+      Uri.parse(
+          'http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=odstranit_z_kosika'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: convert.jsonEncode(<String, String>{
+        'id_product': idProduct,
+      }),
+    );
+
+    print(res.body);
+    return res;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -168,7 +184,9 @@ class CartItem extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(left: 5),
               child: IconButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  _removeFromCart(productDetail.idProduct),
+                },
                 color: Colors.red[700],
                 icon: const Icon(Icons.close),
                 tooltip: 'Delete item from cart',
