@@ -89,7 +89,9 @@ class CartPageState extends State<CartPage> {
             itemCount: _allProducts.length,
             physics: const AlwaysScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              return CartItem(productDetail: _allProducts[index]);
+              return CartItem(
+                  allProducts: _allProducts,
+                  productDetail: _allProducts[index]);
             },
           ),
         ],
@@ -100,11 +102,17 @@ class CartPageState extends State<CartPage> {
 
 class CartItem extends StatelessWidget {
   final CartResult productDetail;
+  final List<CartResult> allProducts;
 
   const CartItem({
     Key? key,
     required this.productDetail,
+    required this.allProducts,
   }) : super(key: key);
+
+  void _removeItem(String id) {
+    allProducts.removeWhere((item) => item.id == id);
+  }
 
   Future<http.Response> _removeFromCart(String idProduct) async {
     final res = await http.post(
@@ -118,7 +126,10 @@ class CartItem extends StatelessWidget {
       }),
     );
 
-    print(res.body);
+    if (res.body == "1") {
+      _removeItem(idProduct);
+    }
+
     return res;
   }
 
