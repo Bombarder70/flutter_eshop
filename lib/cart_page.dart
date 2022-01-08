@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'app_bar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import 'cart.dart';
+import 'product.dart';
+import 'detail_page.dart';
 
 class CartPage extends StatefulWidget {
   final Map planetDetail;
@@ -23,7 +24,7 @@ class CartPageState extends State<CartPage> {
   String nextPage = "";
   int loadedPage = 1;
 
-  List<CartResult> _allProducts = [];
+  List<Result> _allProducts = [];
 
   void _removeItem(String id) {
     setState(() => _allProducts.removeWhere((item) => item.id == id));
@@ -35,7 +36,7 @@ class CartPageState extends State<CartPage> {
     var res = await http.get(url);
 
     var json = convert.jsonDecode(res.body) as Map<String, dynamic>;
-    var products = Cart.fromJson(json);
+    var products = Product.fromJson(json);
 
     nextPage = "stop";
 
@@ -72,7 +73,7 @@ class CartPageState extends State<CartPage> {
                   ),
                   Text(
                     _allProducts.length.toString() + " položky ",
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                   const Text(
                     "(420€)",
@@ -93,6 +94,21 @@ class CartPageState extends State<CartPage> {
               );
             },
           ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: const EdgeInsets.all(5),
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Color(0xa8329d)),
+                ),
+                onPressed: () {},
+                child: const Text('Objednať'),
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -100,7 +116,7 @@ class CartPageState extends State<CartPage> {
 }
 
 class CartItem extends StatelessWidget {
-  final CartResult productDetail;
+  final Result productDetail;
   final ValueChanged<String> removeItem;
 
   const CartItem({
@@ -130,86 +146,97 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      margin: const EdgeInsets.all(10),
-      child: Row(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(3),
-            child: Image.network('https://picsum.photos/250?image=9'),
-          ),
-          Container(
-            margin: const EdgeInsets.all(7),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Container(
-                    child: Text(
-                      productDetail.name,
-                      style: const TextStyle(
-                        fontSize: 22,
+    return InkWell(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute<DetailPage>(
+          builder: (BuildContext context) =>
+              DetailPage(productDetail: productDetail),
+        ),
+      ),
+      child: Container(
+        height: 100,
+        margin: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(3),
+              child: Image.network('https://picsum.photos/250?image=9'),
+            ),
+            Container(
+              margin: const EdgeInsets.all(7),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      child: Text(
+                        productDetail.name,
+                        style: const TextStyle(
+                          fontSize: 22,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 7),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Cena: ",
-                        style: TextStyle(fontSize: 18, color: Colors.grey[600]),
-                      ),
-                      Text(
-                        productDetail.price + " €",
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ],
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 7),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Cena: ",
+                          style:
+                              TextStyle(fontSize: 18, color: Colors.grey[600]),
+                        ),
+                        Text(
+                          productDetail.price + " €",
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 7),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Velkost: ",
-                        style: TextStyle(fontSize: 18, color: Colors.grey[600]),
-                      ),
-                      Text(
-                        "L",
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(left: 5),
-              child: IconButton(
-                onPressed: () => _removeFromCart(productDetail.idProduct),
-                color: Colors.red[700],
-                icon: const Icon(Icons.close),
-                tooltip: 'Delete item from cart',
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 7),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Velkost: ",
+                          style:
+                              TextStyle(fontSize: 18, color: Colors.grey[600]),
+                        ),
+                        Text(
+                          "L",
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
-          ),
-        ],
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(left: 5),
+                child: IconButton(
+                  onPressed: () => _removeFromCart(productDetail.id),
+                  color: Colors.red[700],
+                  icon: const Icon(Icons.close),
+                  tooltip: 'Delete item from cart',
+                ),
+              ),
+            ),
+          ],
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
       ),
     );
   }
