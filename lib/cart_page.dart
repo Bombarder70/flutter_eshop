@@ -25,10 +25,8 @@ class CartPageState extends State<CartPage> {
 
   List<CartResult> _allProducts = [];
 
-  void _removeItem(int id) {
-    setState(() {
-      _allProducts.removeWhere((item) => item.id == id);
-    });
+  void _removeItem(String id) {
+    setState(() => _allProducts.removeWhere((item) => item.id == id));
   }
 
   void _loadData() async {
@@ -66,7 +64,7 @@ class CartPageState extends State<CartPage> {
               margin: const EdgeInsets.all(10),
               child: Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: Text(
                       "Košík",
                       style: TextStyle(fontSize: 26),
@@ -76,7 +74,7 @@ class CartPageState extends State<CartPage> {
                     _allProducts.length.toString() + " položky ",
                     style: TextStyle(fontSize: 20),
                   ),
-                  Text(
+                  const Text(
                     "(420€)",
                     style: TextStyle(fontSize: 20),
                   ),
@@ -90,8 +88,9 @@ class CartPageState extends State<CartPage> {
             physics: const AlwaysScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return CartItem(
-                  allProducts: _allProducts,
-                  productDetail: _allProducts[index]);
+                removeItem: _removeItem,
+                productDetail: _allProducts[index],
+              );
             },
           ),
         ],
@@ -102,17 +101,13 @@ class CartPageState extends State<CartPage> {
 
 class CartItem extends StatelessWidget {
   final CartResult productDetail;
-  final List<CartResult> allProducts;
+  final ValueChanged<String> removeItem;
 
   const CartItem({
     Key? key,
     required this.productDetail,
-    required this.allProducts,
+    required this.removeItem,
   }) : super(key: key);
-
-  void _removeItem(String id) {
-    allProducts.removeWhere((item) => item.id == id);
-  }
 
   Future<http.Response> _removeFromCart(String idProduct) async {
     final res = await http.post(
@@ -127,7 +122,7 @@ class CartItem extends StatelessWidget {
     );
 
     if (res.body == "1") {
-      _removeItem(idProduct);
+      removeItem(idProduct);
     }
 
     return res;
@@ -195,9 +190,7 @@ class CartItem extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(left: 5),
               child: IconButton(
-                onPressed: () => {
-                  _removeFromCart(productDetail.idProduct),
-                },
+                onPressed: () => _removeFromCart(productDetail.idProduct),
                 color: Colors.red[700],
                 icon: const Icon(Icons.close),
                 tooltip: 'Delete item from cart',
