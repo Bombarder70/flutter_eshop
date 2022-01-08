@@ -68,6 +68,7 @@ class _SecondPageState extends State<SecondPage> {
             return Row(
               children: [
                 ProductCard(productDetail: _allProducts[index]),
+                ProductCard(productDetail: _allProducts[index]),
               ],
             );
           },
