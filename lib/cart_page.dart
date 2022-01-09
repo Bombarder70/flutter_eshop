@@ -18,7 +18,7 @@ class CartPageState extends State<CartPage> {
   @override
   void initState() {
     super.initState();
-    _loadData();
+    getCartId(_loadData);
   }
 
   //List<dynamic> _products = [];
@@ -45,14 +45,12 @@ class CartPageState extends State<CartPage> {
     return res;
   }
 
-  void _loadData() async {
-    getCartId();
-
+  void _loadData(String cartId) async {
     var url = Uri(
       scheme: "http",
       host: "10.0.2.2",
       path: "/holes/dia_eshop/web/Admin/index.php",
-      queryParameters: {"action": "kosik", "cart_id": "1"},
+      queryParameters: {"action": "kosik", "cart_id": cartId},
     );
 
     var res = await http.get(url);
