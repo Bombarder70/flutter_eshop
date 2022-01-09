@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'product.dart';
 import 'detail_page.dart';
-import 'get_uid.dart';
+import 'get_cart_id.dart';
 
 class CartPage extends StatefulWidget {
   final Map planetDetail;
