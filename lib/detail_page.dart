@@ -1,3 +1,4 @@
+import 'package:eshop_app/get_cart_id.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
@@ -21,8 +22,12 @@ class DetailPage extends StatefulWidget {
 }
 
 class DetailPageState extends State<DetailPage> {
-  Future<http.Response> _addToCart(String idProduct) async {
-    final res = await http.post(
+  void _addToCart(String idProduct) {
+    getCartIdWithProductId(_addToCartHttp, idProduct);
+  }
+
+  void _addToCartHttp(String idProduct) async {
+    var res = await http.post(
       Uri.parse(
           'http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=pridat_do_kosika'),
       headers: <String, String>{
@@ -34,7 +39,6 @@ class DetailPageState extends State<DetailPage> {
     );
 
     print(res.body);
-    return res;
   }
 
   @override
