@@ -25,9 +25,23 @@ class CartPageState extends State<CartPage> {
   int loadedPage = 1;
 
   List<Result> _allProducts = [];
+  int cenaSpolu = 0;
 
   void _removeItem(String id) {
     setState(() => _allProducts.removeWhere((item) => item.id == id));
+  }
+
+  Future<http.Response> _placeOrder() async {
+    final res = await http.post(
+      Uri.parse(
+          'http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=objednat'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    print(res.body);
+    return res;
   }
 
   void _loadData() async {
@@ -40,14 +54,9 @@ class CartPageState extends State<CartPage> {
 
     nextPage = "stop";
 
-    /*if (loadedPage > 1) {
-      mergeData(results);
-    } else {
-      _allPlanets = results;
-    }*/
-
     setState(() {
       _allProducts = products.results;
+      //cenaSpolu = products.cenaSpolu;
     });
   }
 
@@ -104,7 +113,7 @@ class CartPageState extends State<CartPage> {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Color(0xa8329d)),
                 ),
-                onPressed: () {},
+                onPressed: () => _placeOrder(),
                 child: const Text('Objednať'),
               ),
             ),
