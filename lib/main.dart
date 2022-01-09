@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'specific_page.dart';
 import 'app_bar.dart';
+import 'get_uid.dart';
 
 void main() {
   runApp(const MyApp());
