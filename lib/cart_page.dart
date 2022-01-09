@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'product.dart';
 import 'detail_page.dart';
+import 'get_uid.dart';
 
 class CartPage extends StatefulWidget {
   final Map planetDetail;
@@ -45,8 +46,15 @@ class CartPageState extends State<CartPage> {
   }
 
   void _loadData() async {
-    var url = Uri.parse(
-        "http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=kosik");
+    getCartId();
+
+    var url = Uri(
+      scheme: "http",
+      host: "10.0.2.2",
+      path: "/holes/dia_eshop/web/Admin/index.php",
+      queryParameters: {"action": "kosik", "cart_id": "1"},
+    );
+
     var res = await http.get(url);
 
     var json = convert.jsonDecode(res.body) as Map<String, dynamic>;
