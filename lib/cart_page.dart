@@ -32,17 +32,23 @@ class CartPageState extends State<CartPage> {
     setState(() => _allProducts.removeWhere((item) => item.id == id));
   }
 
-  Future<http.Response> _placeOrder() async {
-    final res = await http.post(
+  void _placeOrder() {
+    getCartIdPlaceOrder(_placeOrderHttp);
+  }
+
+  void _placeOrderHttp(String idCart) async {
+    var res = await http.post(
       Uri.parse(
           'http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=objednat'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
+      body: convert.jsonEncode(
+        <String, String>{'id_cart': idCart},
+      ),
     );
 
     print(res.body);
-    return res;
   }
 
   void _loadData(String cartId) async {
