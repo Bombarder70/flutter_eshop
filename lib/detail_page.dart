@@ -26,7 +26,7 @@ class DetailPageState extends State<DetailPage> {
     getCartIdWithProductId(_addToCartHttp, idProduct);
   }
 
-  void _addToCartHttp(String idProduct) async {
+  void _addToCartHttp(String idProduct, String idCart) async {
     var res = await http.post(
       Uri.parse(
           'http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=pridat_do_kosika'),
@@ -35,6 +35,7 @@ class DetailPageState extends State<DetailPage> {
       },
       body: convert.jsonEncode(<String, String>{
         'id_product': idProduct,
+        'id_cart': idCart,
       }),
     );
 
