@@ -78,60 +78,62 @@ class CartPageState extends State<CartPage> {
       appBar: CustomAppBar(
         showActions: false,
       ),
-      body: ListView(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: Container(
-              margin: const EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  const Expanded(
-                    child: Text(
-                      "Košík",
-                      style: TextStyle(fontSize: 26),
+      body: _allProducts.isEmpty
+          ? const Text('Košík je prázdny')
+          : ListView(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    margin: const EdgeInsets.all(10),
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            "Košík",
+                            style: TextStyle(fontSize: 26),
+                          ),
+                        ),
+                        Text(
+                          _allProducts.length.toString() + " položky ",
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                        const Text(
+                          "(420€)",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    _allProducts.length.toString() + " položky ",
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  const Text(
-                    "(420€)",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: _allProducts.length,
-            physics: const AlwaysScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return CartItem(
-                removeItem: _removeItem,
-                productDetail: _allProducts[index],
-              );
-            },
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              margin: const EdgeInsets.all(5),
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xa8329d)),
                 ),
-                onPressed: () => _placeOrder(),
-                child: const Text('Objednať'),
-              ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: _allProducts.length,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return CartItem(
+                      removeItem: _removeItem,
+                      productDetail: _allProducts[index],
+                    );
+                  },
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: const EdgeInsets.all(5),
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Color(0xa8329d)),
+                      ),
+                      onPressed: () => _placeOrder(),
+                      child: const Text('Objednať'),
+                    ),
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
     );
   }
 }
