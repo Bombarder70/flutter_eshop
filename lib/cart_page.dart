@@ -85,7 +85,10 @@ class CartPageState extends State<CartPage> {
         showActions: false,
       ),
       body: _allProducts.isEmpty
-          ? const Text('Košík je prázdny')
+          ? Container(
+              margin: const EdgeInsets.only(top: 150),
+              child: Image.asset('assets/files/empty_cart.png'),
+            )
           : ListView(
               children: [
                 Container(
