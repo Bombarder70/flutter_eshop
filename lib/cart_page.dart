@@ -154,7 +154,11 @@ class CartItem extends StatelessWidget {
     required this.removeItem,
   }) : super(key: key);
 
-  Future<http.Response> _removeFromCart(String idProduct) async {
+  void _removeFromCart(String idProduct) {
+    getCartIdRemoveFromCart(_removeFromCartHttp, idProduct);
+  }
+
+  void _removeFromCartHttp(String idProduct, String idCart) async {
     final res = await http.post(
       Uri.parse(
           'http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=odstranit_z_kosika'),
@@ -163,14 +167,13 @@ class CartItem extends StatelessWidget {
       },
       body: convert.jsonEncode(<String, String>{
         'id_product': idProduct,
+        'id_cart': idCart,
       }),
     );
 
     if (res.body == "1") {
       removeItem(idProduct);
     }
-
-    return res;
   }
 
   @override
