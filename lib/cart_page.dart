@@ -60,15 +60,21 @@ class CartPageState extends State<CartPage> {
     );
 
     var res = await http.get(url);
-
     var json = convert.jsonDecode(res.body) as Map<String, dynamic>;
-    var products = Product.fromJson(json);
+
+    var products;
+
+    if (json['results'] != null) {
+      products = Product.fromJson(json);
+    }
 
     nextPage = "stop";
 
     setState(() {
-      _allProducts = products.results;
-      //cenaSpolu = products.cenaSpolu;
+      if (json['results'] != null) {
+        _allProducts = products.results;
+        //cenaSpolu = json.cena_spolu;
+      }
     });
   }
 
