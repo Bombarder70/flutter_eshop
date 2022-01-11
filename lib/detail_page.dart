@@ -5,6 +5,7 @@ import 'package:flutter_material_color_picker/flutter_material_color_picker.dart
 import 'app_bar.dart';
 import 'size_picker.dart';
 import 'product.dart';
+import 'cart_page.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -160,6 +161,29 @@ class DetailPageState extends State<DetailPage> {
         backgroundColor: Colors.deepOrange[200],
         onPressed: () {
           _addToCart(widget.productDetail.id);
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: const Text('Produkt pridaný do košíka'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'Späť k nákupu'),
+                  child: const Text('Späť k nákupu'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<CartPage>(
+                      builder: (BuildContext context) => const CartPage(
+                        planetDetail: {"name": "Test"},
+                      ),
+                    ),
+                  ),
+                  child: const Text('Zobraziť košík'),
+                ),
+              ],
+            ),
+          );
         },
         icon: const Icon(Icons.shopping_cart),
         label: const Text('Pridať do košíka'),
