@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
           children: [
             Row(
               children: [
-                const HeaderCard(title: "Men"),
-                const HeaderCard(title: "Woman"),
-                const HeaderCard(title: "Childs"),
+                HeaderCard(title: "Men", img: "men"),
+                HeaderCard(title: "Womans", img: "women"),
+                HeaderCard(title: "Childs", img: "child"),
               ],
             ),
             Container(
@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
                 ),
                 child: const Text('Drawer Header'),
               ),
-              const DrawerItem(title: "Woman"),
+              const DrawerItem(title: "Womans"),
               const DrawerItem(title: "Men"),
               const DrawerItem(title: "Childs"),
               const Divider(
@@ -87,8 +87,10 @@ class MyApp extends StatelessWidget {
 
 class HeaderCard extends StatelessWidget {
   final String title;
+  final String img;
 
-  const HeaderCard({Key? key, required this.title}) : super(key: key);
+  const HeaderCard({Key? key, required this.title, required this.img})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -101,8 +103,8 @@ class HeaderCard extends StatelessWidget {
               radius: 45,
               backgroundColor: Colors.deepOrange[200],
               child: ClipOval(
-                child: CachedNetworkImage(
-                  imageUrl: "https://picsum.photos/250?image=9",
+                child: Image.asset(
+                  'assets/files/' + img + '.png',
                   fit: BoxFit.cover,
                   width: 80,
                   height: 80,
