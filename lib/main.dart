@@ -70,13 +70,22 @@ class MyApp extends StatelessWidget {
                 ),
                 child: const Text('Drawer Header'),
               ),
-              const DrawerItem(title: "Ženy"),
-              const DrawerItem(title: "Muži"),
-              const DrawerItem(title: "Deti"),
+              const DrawerItem(title: "Všetko", size: 22),
               const Divider(
-                color: Colors.black,
-                height: 25,
-              )
+                thickness: 2,
+              ),
+              const DrawerItem(title: "Muži", size: 18),
+              const DrawerItem(title: "Ženy", size: 18),
+              const DrawerItem(title: "Deti", size: 18),
+              const Divider(
+                thickness: 2,
+              ),
+              const DrawerItem(title: "Tenisky", size: 16),
+              const DrawerItem(title: "Tričká", size: 16),
+              const DrawerItem(title: "Legíny", size: 16),
+              const DrawerItem(title: "Rifle", size: 16),
+              const DrawerItem(title: "Tepláky", size: 16),
+              const DrawerItem(title: "Šaty", size: 16),
             ],
           ),
         ),
@@ -150,10 +159,12 @@ class AllCategoriesCard extends StatelessWidget {
 
 class DrawerItem extends StatelessWidget {
   final String title;
+  final double size;
 
   const DrawerItem({
     Key? key,
     required this.title,
+    required this.size,
   }) : super(key: key);
 
   @override
@@ -161,7 +172,7 @@ class DrawerItem extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: const TextStyle(fontSize: 18),
+        style: TextStyle(fontSize: size),
       ),
       onTap: () {
         Navigator.push(
