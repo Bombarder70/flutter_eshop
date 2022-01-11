@@ -50,6 +50,7 @@ class DetailPageState extends State<DetailPage> {
         children: [
           Container(
             height: 400,
+            padding: const EdgeInsets.all(10),
             child: Image.network(
               'http://10.0.2.2/holes/dia_eshop/files/products/' +
                   widget.productDetail.image,
