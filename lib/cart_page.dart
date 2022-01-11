@@ -202,8 +202,9 @@ class CartItem extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.all(3),
+              padding: const EdgeInsets.all(5),
               child: Image.network(
-                'http://10.0.2.2/holes/dia/files/products/' +
+                'http://10.0.2.2/holes/dia_eshop/files/products/' +
                     productDetail.image,
               ),
             ),
