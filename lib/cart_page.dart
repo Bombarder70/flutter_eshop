@@ -73,7 +73,7 @@ class CartPageState extends State<CartPage> {
     setState(() {
       if (json['results'] != null) {
         _allProducts = products.results;
-        //cenaSpolu = json.cena_spolu;
+        cenaSpolu = json['cena_spolu'];
       }
     });
   }
@@ -105,11 +105,17 @@ class CartPageState extends State<CartPage> {
                         ),
                         Text(
                           _allProducts.length.toString() + " položky ",
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        const Text(
-                          "(420€)",
-                          style: TextStyle(fontSize: 20),
+                        Text(
+                          "(" + cenaSpolu.toString() + "€)",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.deepOrange[400],
+                          ),
                         ),
                       ],
                     ),
@@ -211,6 +217,7 @@ class CartItem extends StatelessWidget {
                         productDetail.name,
                         style: const TextStyle(
                           fontSize: 22,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -225,8 +232,9 @@ class CartItem extends StatelessWidget {
                               TextStyle(fontSize: 18, color: Colors.grey[600]),
                         ),
                         Text(
-                          productDetail.price + " €",
-                          style: const TextStyle(fontSize: 18),
+                          productDetail.price + "€",
+                          style: TextStyle(
+                              fontSize: 18, color: Colors.deepOrange[400]),
                         ),
                       ],
                     ),
