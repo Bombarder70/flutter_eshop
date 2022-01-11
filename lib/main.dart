@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
           children: [
             Row(
               children: [
-                HeaderCard(title: "Men", img: "men"),
-                HeaderCard(title: "Womans", img: "women"),
-                HeaderCard(title: "Childs", img: "child"),
+                HeaderCard(title: "Muži", img: "men"),
+                HeaderCard(title: "Ženy", img: "women"),
+                HeaderCard(title: "Deti", img: "child"),
               ],
             ),
             Container(
@@ -70,9 +70,9 @@ class MyApp extends StatelessWidget {
                 ),
                 child: const Text('Drawer Header'),
               ),
-              const DrawerItem(title: "Womans"),
-              const DrawerItem(title: "Men"),
-              const DrawerItem(title: "Childs"),
+              const DrawerItem(title: "Ženy"),
+              const DrawerItem(title: "Muži"),
+              const DrawerItem(title: "Deti"),
               const Divider(
                 color: Colors.black,
                 height: 25,
