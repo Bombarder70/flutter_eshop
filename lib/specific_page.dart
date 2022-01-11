@@ -13,6 +13,11 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
   //List<dynamic> _products = [];
   String nextPage = "";
   int loadedPage = 1;
@@ -55,22 +60,17 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      body: LoadMore(
-        isFinish: nextPage == "stop",
-        onLoadMore: _loadMore,
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: _allProducts.length,
-          physics: const AlwaysScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return Row(
-              children: [
-                ProductCard(productDetail: _allProducts[index]),
-                ProductCard(productDetail: _allProducts[index]),
-              ],
-            );
-          },
+      body: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 250,
+          childAspectRatio: 3 / 4,
+          crossAxisSpacing: 0,
+          mainAxisSpacing: 0,
         ),
+        itemCount: _allProducts.length,
+        itemBuilder: (context, index) {
+          return ProductCard(productDetail: _allProducts[index]);
+        },
       ),
     );
   }
@@ -124,62 +124,60 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute<DetailPage>(
-              builder: (BuildContext context) =>
-                  DetailPage(productDetail: productDetail),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute<DetailPage>(
+            builder: (BuildContext context) =>
+                DetailPage(productDetail: productDetail),
+          ),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.all(7),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              child: Image.network(
+                  'http://10.0.2.2/holes/dia_eshop/files/products/' +
+                      productDetail.image,
+                  height: 150,
+                  fit: BoxFit.fill),
             ),
-          );
-        },
-        child: Container(
-          margin: const EdgeInsets.all(5),
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: Image.network(
-                    'http://10.0.2.2/holes/dia_eshop/files/products/' +
-                        productDetail.image,
-                    height: 150,
-                    fit: BoxFit.fill),
+            Text(
+              productDetail.name,
+              style: const TextStyle(
+                fontSize: 20,
               ),
-              Text(
-                productDetail.name,
-                style: const TextStyle(
-                  fontSize: 20,
-                ),
+            ),
+            Text(
+              productDetail.price + " €",
+              style: const TextStyle(
+                fontSize: 20,
               ),
-              Text(
-                productDetail.price + " €",
-                style: const TextStyle(
-                  fontSize: 20,
-                ),
+            ),
+            Text(
+              "-50%",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.green,
               ),
-              Text(
-                "-50%",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.green,
-                ),
-              ),
-            ],
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
+            ),
+          ],
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
         ),
       ),
     );
