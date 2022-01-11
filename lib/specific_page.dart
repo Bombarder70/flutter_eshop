@@ -142,9 +142,10 @@ class ProductCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 child: Image.network(
-                  'http://10.0.2.2/holes/dia/files/products/' +
-                      productDetail.image,
-                ),
+                    'http://10.0.2.2/holes/dia_eshop/files/products/' +
+                        productDetail.image,
+                    height: 150,
+                    fit: BoxFit.fill),
               ),
               Text(
                 productDetail.name,

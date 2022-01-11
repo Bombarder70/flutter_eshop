@@ -51,7 +51,7 @@ class DetailPageState extends State<DetailPage> {
           Container(
             height: 400,
             child: Image.network(
-              'http://10.0.2.2/holes/dia/files/products/' +
+              'http://10.0.2.2/holes/dia_eshop/files/products/' +
                   widget.productDetail.image,
             ),
           ),
