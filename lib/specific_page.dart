@@ -63,7 +63,7 @@ class _SecondPageState extends State<SecondPage> {
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 250,
-          childAspectRatio: 3 / 4,
+          childAspectRatio: 3 / 3.8,
           crossAxisSpacing: 0,
           mainAxisSpacing: 0,
         ),
@@ -146,10 +146,15 @@ class ProductCard extends StatelessWidget {
                   height: 150,
                   fit: BoxFit.fill),
             ),
-            Text(
-              productDetail.name,
-              style: const TextStyle(
-                fontSize: 20,
+            Container(
+              margin: const EdgeInsets.only(bottom: 5),
+              child: Text(
+                productDetail.name,
+                style: const TextStyle(
+                  fontSize: 22,
+                  //color: Colors.deepOrange[200],
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Text(
@@ -158,10 +163,10 @@ class ProductCard extends StatelessWidget {
                 fontSize: 20,
               ),
             ),
-            Text(
+            const Text(
               "-50%",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 19,
                 color: Colors.green,
               ),
             ),
