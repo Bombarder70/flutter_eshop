@@ -7,9 +7,7 @@ import 'package:loadmore/loadmore.dart';
 import 'product.dart';
 
 class SecondPage extends StatefulWidget {
-  final Result productDetail;
-
-  const SecondPage({Key? key, required this.productDetail}) : super(key: key);
+  const SecondPage({Key? key}) : super(key: key);
   @override
   State<SecondPage> createState() => _SecondPageState();
 }

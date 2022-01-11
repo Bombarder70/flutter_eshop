@@ -159,18 +159,7 @@ class DrawerItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute<SecondPage>(
-            builder: (BuildContext context) => SecondPage(
-              productDetail: Result(
-                id: "1",
-                image: "xx",
-                name: "xxx",
-                price: "321",
-                available: "1",
-                count: "1",
-                description: "dasdsa",
-                type: "1",
-              ),
-            ),
+            builder: (BuildContext context) => const SecondPage(),
           ),
         );
       },
