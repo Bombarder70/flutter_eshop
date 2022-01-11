@@ -95,27 +95,35 @@ class HeaderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 45,
-              backgroundColor: Colors.deepOrange[200],
-              child: ClipOval(
-                child: Image.asset(
-                  'assets/files/' + img + '.png',
-                  fit: BoxFit.cover,
-                  width: 80,
-                  height: 80,
+      child: InkWell(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute<SecondPage>(
+            builder: (BuildContext context) => const SecondPage(),
+          ),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 45,
+                backgroundColor: Colors.deepOrange[200],
+                child: ClipOval(
+                  child: Image.asset(
+                    'assets/files/' + img + '.png',
+                    fit: BoxFit.cover,
+                    width: 80,
+                    height: 80,
+                  ),
                 ),
               ),
-            ),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 17),
-            ),
-          ],
+              Text(
+                title,
+                style: const TextStyle(fontSize: 17),
+              ),
+            ],
+          ),
         ),
       ),
     );
