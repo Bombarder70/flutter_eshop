@@ -74,7 +74,7 @@ class CartPageState extends State<CartPage> {
       if (json['results'] != null) {
         _allProducts = products.results;
 
-        cenaSpolu = json['cena_spolu'];
+        cenaSpolu = json['cena_spolu'].toDouble();
       }
     });
   }
