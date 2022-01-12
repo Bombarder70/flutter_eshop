@@ -187,9 +187,14 @@ class AllCategoriesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
+        decoration: BoxDecoration(
+          borderRadius: new BorderRadius.only(
+            topLeft: const Radius.circular(40.0),
+            topRight: const Radius.circular(40.0),
+          ),
+        ),
         padding: const EdgeInsets.all(5),
         margin: const EdgeInsets.all(5),
-        color: Colors.deepOrange[200],
         child: Image.network('https://picsum.photos/250?image=9'),
       ),
     );
