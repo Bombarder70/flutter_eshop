@@ -33,9 +33,25 @@ class MyApp extends StatelessWidget {
               ],
             ),
             Container(
-              color: Colors.red,
-              height: 175,
-              margin: EdgeInsets.only(bottom: 10),
+              height: 200,
+              margin: EdgeInsets.only(left: 2, right: 2, top: 20, bottom: 20),
+              child: FittedBox(
+                child: Image.network(
+                    'https://image.freepik.com/psd-gratuitas/modelo-de-banner-com-design-de-compras-online_23-2148550895.jpg'),
+                fit: BoxFit.fill,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
             ),
             Row(
               children: [
@@ -57,6 +73,27 @@ class MyApp extends StatelessWidget {
                 AllCategoriesCard(),
                 AllCategoriesCard(),
               ],
+            ),
+            Container(
+              height: 200,
+              margin: EdgeInsets.only(left: 2, right: 2, top: 20, bottom: 20),
+              child: FittedBox(
+                child: Image.network(
+                    'https://image.freepik.com/free-psd/online-shopping-banner-design_23-2148552605.jpg'),
+                fit: BoxFit.fill,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
             ),
           ],
         ),
