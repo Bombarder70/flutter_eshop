@@ -7,7 +7,9 @@ import 'package:loadmore/loadmore.dart';
 import 'product.dart';
 
 class SecondPage extends StatefulWidget {
-  const SecondPage({Key? key}) : super(key: key);
+  final String type;
+
+  const SecondPage({Key? key, required this.type}) : super(key: key);
   @override
   State<SecondPage> createState() => _SecondPageState();
 }
@@ -15,7 +17,7 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   void initState() {
     super.initState();
-    _loadData();
+    _loadData(widget.type);
   }
 
   //List<dynamic> _products = [];
@@ -24,16 +26,21 @@ class _SecondPageState extends State<SecondPage> {
 
   List<Result> _allProducts = [];
 
-  Future<bool> _loadMore() async {
+  /*Future<bool> _loadMore() async {
     await Future.delayed(const Duration(seconds: 0, milliseconds: 500));
     _loadData();
 
     return true;
-  }
+  }*/
 
-  void _loadData() async {
-    var url = Uri.parse(
-        "http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=vsetky_produkty");
+  void _loadData(String type) async {
+    var url = Uri(
+      scheme: "http",
+      host: "10.0.2.2",
+      path: "/holes/dia_eshop/web/Admin/index.php",
+      queryParameters: {"action": "vsetky_produkty", "type": type},
+    );
+
     var res = await http.get(url);
 
     var json = convert.jsonDecode(res.body) as Map<String, dynamic>;
