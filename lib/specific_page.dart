@@ -53,54 +53,62 @@ class _SecondPageState extends State<SecondPage> {
     });
   }
 
-  /*Container(
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              children: [
-                FilterItem(title: "Zoradiť", icon: Icons.sort),
-                FilterItem(title: "Filtrovať", icon: Icons.filter_alt),
-              ],
-            ),
-          ),*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 250,
-          childAspectRatio: 3 / 4.25,
-          crossAxisSpacing: 0,
-          mainAxisSpacing: 0,
-        ),
-        itemCount: _allProducts.length,
-        itemBuilder: (context, index) {
-          return Stack(
-            alignment: AlignmentDirectional.center,
-            children: [
-              ProductCard(productDetail: _allProducts[index]),
-              Positioned(
-                top: 10,
-                left: 10,
-                child: Container(
-                  child: const Text(
-                    '-50%',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.deepOrange[300],
-                  ),
-                ),
+      body: SingleChildScrollView(
+        physics: ScrollPhysics(),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(15),
+              child: Row(
+                children: [
+                  FilterItem(title: "Zoradiť", icon: Icons.sort),
+                  FilterItem(title: "Filtrovať", icon: Icons.filter_alt),
+                ],
               ),
-            ],
-          );
-        },
+            ),
+            GridView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 250,
+                childAspectRatio: 3 / 4.25,
+                crossAxisSpacing: 0,
+                mainAxisSpacing: 0,
+              ),
+              itemCount: _allProducts.length,
+              itemBuilder: (context, index) {
+                return Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: [
+                    ProductCard(productDetail: _allProducts[index]),
+                    Positioned(
+                      top: 10,
+                      left: 10,
+                      child: Container(
+                        child: const Text(
+                          '-50%',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.deepOrange[300],
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
