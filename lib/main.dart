@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
           children: [
             Row(
               children: [
-                HeaderCard(title: "Muži", img: "men"),
-                HeaderCard(title: "Ženy", img: "women"),
-                HeaderCard(title: "Deti", img: "child"),
+                HeaderCard(title: "Muži", img: "men", type: "2"),
+                HeaderCard(title: "Ženy", img: "women", type: "3"),
+                HeaderCard(title: "Deti", img: "child", type: "1"),
               ],
             ),
             Container(
@@ -70,22 +70,22 @@ class MyApp extends StatelessWidget {
                 ),
                 child: const Text('Drawer Header'),
               ),
-              const DrawerItem(title: "Všetko", size: 22),
+              const DrawerItem(title: "Všetko", size: 22, type: "1"),
               const Divider(
                 thickness: 2,
               ),
-              const DrawerItem(title: "Muži", size: 18),
-              const DrawerItem(title: "Ženy", size: 18),
-              const DrawerItem(title: "Deti", size: 18),
+              const DrawerItem(title: "Muži", size: 18, type: "2"),
+              const DrawerItem(title: "Ženy", size: 18, type: "3"),
+              const DrawerItem(title: "Deti", size: 18, type: "1"),
               const Divider(
                 thickness: 2,
               ),
-              const DrawerItem(title: "Tenisky", size: 16),
-              const DrawerItem(title: "Tričká", size: 16),
-              const DrawerItem(title: "Legíny", size: 16),
-              const DrawerItem(title: "Rifle", size: 16),
-              const DrawerItem(title: "Tepláky", size: 16),
-              const DrawerItem(title: "Šaty", size: 16),
+              const DrawerItem(title: "Tenisky", size: 16, type: "1"),
+              const DrawerItem(title: "Tričká", size: 16, type: "1"),
+              const DrawerItem(title: "Legíny", size: 16, type: "1"),
+              const DrawerItem(title: "Rifle", size: 16, type: "1"),
+              const DrawerItem(title: "Tepláky", size: 16, type: "1"),
+              const DrawerItem(title: "Šaty", size: 16, type: "1"),
             ],
           ),
         ),
@@ -97,8 +97,10 @@ class MyApp extends StatelessWidget {
 class HeaderCard extends StatelessWidget {
   final String title;
   final String img;
+  final String type;
 
-  const HeaderCard({Key? key, required this.title, required this.img})
+  const HeaderCard(
+      {Key? key, required this.title, required this.img, required this.type})
       : super(key: key);
 
   @override
@@ -108,7 +110,7 @@ class HeaderCard extends StatelessWidget {
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute<SecondPage>(
-            builder: (BuildContext context) => const SecondPage(),
+            builder: (BuildContext context) => SecondPage(type: type),
           ),
         ),
         child: Container(
@@ -160,11 +162,13 @@ class AllCategoriesCard extends StatelessWidget {
 class DrawerItem extends StatelessWidget {
   final String title;
   final double size;
+  final String type;
 
   const DrawerItem({
     Key? key,
     required this.title,
     required this.size,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -178,7 +182,7 @@ class DrawerItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute<SecondPage>(
-            builder: (BuildContext context) => const SecondPage(),
+            builder: (BuildContext context) => SecondPage(type: type),
           ),
         );
       },
