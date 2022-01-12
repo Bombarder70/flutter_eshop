@@ -127,26 +127,45 @@ class FilterItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: Colors.grey,
-            size: 30.0,
-          ),
-          const VerticalDivider(
-            color: Colors.black,
-            thickness: 2,
-          ),
-          Container(
-            margin: const EdgeInsets.only(left: 5),
-            child: Text(
-              title,
-              style: const TextStyle(fontSize: 20),
+      child: InkWell(
+        onTap: () {
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: const Text('Produkt pridaný do košíka'),
+              actions: [
+                Column(
+                  children: [
+                    ListTile(
+                      title: const Text('Vzostupbne'),
+                    ),
+                  ],
+                )
+              ],
             ),
-          ),
-        ],
+          );
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: Colors.grey,
+              size: 30.0,
+            ),
+            const VerticalDivider(
+              color: Colors.black,
+              thickness: 2,
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 5),
+              child: Text(
+                title,
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
