@@ -70,7 +70,7 @@ class _SecondPageState extends State<SecondPage> {
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 250,
-          childAspectRatio: 3 / 3.8,
+          childAspectRatio: 3 / 4,
           crossAxisSpacing: 0,
           mainAxisSpacing: 0,
         ),
