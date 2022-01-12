@@ -70,13 +70,34 @@ class _SecondPageState extends State<SecondPage> {
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 250,
-          childAspectRatio: 3 / 4,
+          childAspectRatio: 3 / 4.25,
           crossAxisSpacing: 0,
           mainAxisSpacing: 0,
         ),
         itemCount: _allProducts.length,
         itemBuilder: (context, index) {
-          return ProductCard(productDetail: _allProducts[index]);
+          return Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              ProductCard(productDetail: _allProducts[index]),
+              Positioned(
+                top: 10,
+                left: 10,
+                child: Container(
+                  child: Text(
+                    '-50%',
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.deepOrange[200],
+                  ),
+                ),
+              ),
+            ],
+          );
         },
       ),
     );
@@ -142,6 +163,7 @@ class ProductCard extends StatelessWidget {
         );
       },
       child: Container(
+        width: 250,
         margin: const EdgeInsets.all(7),
         child: Column(
           children: [
@@ -164,17 +186,21 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
             ),
+            Container(
+              margin: const EdgeInsets.all(5),
+              child: Text(
+                productDetail.price + " €",
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey,
+                  decoration: TextDecoration.lineThrough,
+                ),
+              ),
+            ),
             Text(
               productDetail.price + " €",
               style: const TextStyle(
                 fontSize: 20,
-              ),
-            ),
-            const Text(
-              "-50%",
-              style: TextStyle(
-                fontSize: 19,
-                color: Colors.green,
               ),
             ),
           ],
