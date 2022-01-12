@@ -26,7 +26,7 @@ class CartPageState extends State<CartPage> {
   int loadedPage = 1;
 
   List<Result> _allProducts = [];
-  int cenaSpolu = 0;
+  double cenaSpolu = 0;
 
   void _removeItem(String id) {
     setState(() => _allProducts.removeWhere((item) => item.id == id));
@@ -73,6 +73,7 @@ class CartPageState extends State<CartPage> {
     setState(() {
       if (json['results'] != null) {
         _allProducts = products.results;
+
         cenaSpolu = json['cena_spolu'];
       }
     });
