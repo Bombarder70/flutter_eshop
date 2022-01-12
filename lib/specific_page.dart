@@ -84,15 +84,17 @@ class _SecondPageState extends State<SecondPage> {
                 top: 10,
                 left: 10,
                 child: Container(
-                  child: Text(
+                  child: const Text(
                     '-50%',
-                    style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.deepOrange[200],
+                    color: Colors.deepOrange[300],
                   ),
                 ),
               ),
@@ -150,6 +152,13 @@ class ProductCard extends StatelessWidget {
     required this.productDetail,
   }) : super(key: key);
 
+  String getPriceDiscount(String price, String discount) {
+    double discountDouble = num.tryParse(discount)!.toDouble();
+    double priceDouble = num.tryParse(price)!.toDouble();
+
+    return ((priceDouble / 100) * (100 - discountDouble)).toStringAsFixed(2);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -179,9 +188,9 @@ class ProductCard extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 5),
               child: Text(
                 productDetail.name,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 22,
-                  //color: Colors.deepOrange[200],
+                  color: Colors.deepOrange[300],
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -189,7 +198,7 @@ class ProductCard extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(5),
               child: Text(
-                productDetail.price + " €",
+                productDetail.price + "€",
                 style: const TextStyle(
                   fontSize: 18,
                   color: Colors.grey,
@@ -198,7 +207,7 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             Text(
-              productDetail.price + " €",
+              getPriceDiscount(productDetail.price, "50") + "€",
               style: const TextStyle(
                 fontSize: 20,
               ),
