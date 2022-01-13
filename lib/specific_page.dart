@@ -3,7 +3,6 @@ import 'app_bar.dart';
 import 'detail_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import 'package:loadmore/loadmore.dart';
 import 'product.dart';
 
 class SecondPage extends StatefulWidget {
@@ -15,6 +14,7 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
+  @override
   void initState() {
     super.initState();
     // Nastav na najnovsie
@@ -162,9 +162,9 @@ class FilterItem extends StatelessWidget {
   }) : super(key: key);
 
   void onChanged(int? value) {
-    //print(value);
     onRadioChanged(value);
-    var orderName;
+    String orderName;
+
     if (value == 1 || value == 2) {
       orderName = "price";
     } else {
