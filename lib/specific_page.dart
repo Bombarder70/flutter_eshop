@@ -24,6 +24,15 @@ class _SecondPageState extends State<SecondPage> {
   String nextPage = "";
   int loadedPage = 1;
 
+  // rdaio buttons
+  // zoradenie
+  int? radioValue;
+  void setRadioValue(int? value) {
+    setState(() {
+      radioValue = value;
+    });
+  }
+
   List<Result> _allProducts = [];
 
   /*Future<bool> _loadMore() async {
@@ -65,8 +74,18 @@ class _SecondPageState extends State<SecondPage> {
               padding: const EdgeInsets.all(15),
               child: Row(
                 children: [
-                  FilterItem(title: "Zoradiť", icon: Icons.sort),
-                  FilterItem(title: "Filtrovať", icon: Icons.filter_alt),
+                  FilterItem(
+                    title: "Zoradiť",
+                    icon: Icons.sort,
+                    onRadioChanged: setRadioValue,
+                    radioValue: radioValue,
+                  ),
+                  FilterItem(
+                    title: "Filtrovať",
+                    icon: Icons.filter_alt,
+                    onRadioChanged: setRadioValue,
+                    radioValue: radioValue,
+                  ),
                 ],
               ),
             ),
@@ -117,16 +136,20 @@ class _SecondPageState extends State<SecondPage> {
 class FilterItem extends StatelessWidget {
   final String title;
   final IconData icon;
+  final Function onRadioChanged;
+  final int? radioValue;
 
   const FilterItem({
     Key? key,
     required this.title,
     required this.icon,
+    required this.onRadioChanged,
+    this.radioValue,
   }) : super(key: key);
 
   void onChanged(int? value) {
-    print("Radio has been tapped.");
-
+    print(value);
+    onRadioChanged(value);
     //Whatever happendeed, it was clicked, so call the extra method
     //eitherRadioTapped();
 
@@ -151,15 +174,15 @@ class FilterItem extends StatelessWidget {
                     RadioListTile(
                       title: const Text('Vzostupne'),
                       value: 1,
-                      groupValue: 1,
+                      groupValue: radioValue,
                       onChanged: (int? value) {
                         onChanged(value);
                       },
                     ),
                     RadioListTile(
                       title: const Text('Zostupne'),
-                      value: 1,
-                      groupValue: 1,
+                      value: 2,
+                      groupValue: radioValue,
                       onChanged: (int? value) {
                         onChanged(value);
                       },
