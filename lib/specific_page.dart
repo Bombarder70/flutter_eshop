@@ -79,12 +79,16 @@ class _SecondPageState extends State<SecondPage> {
                     icon: Icons.sort,
                     onRadioChanged: setRadioValue,
                     radioValue: radioValue,
+                    loadData: _loadData,
+                    widgetType: widget.type,
                   ),
                   FilterItem(
                     title: "Filtrovať",
                     icon: Icons.filter_alt,
                     onRadioChanged: setRadioValue,
                     radioValue: radioValue,
+                    loadData: _loadData,
+                    widgetType: widget.type,
                   ),
                 ],
               ),
@@ -138,6 +142,8 @@ class FilterItem extends StatelessWidget {
   final IconData icon;
   final Function onRadioChanged;
   final int radioValue;
+  final String widgetType;
+  final Function loadData;
 
   const FilterItem({
     Key? key,
@@ -145,11 +151,14 @@ class FilterItem extends StatelessWidget {
     required this.icon,
     required this.onRadioChanged,
     required this.radioValue,
+    required this.widgetType,
+    required this.loadData,
   }) : super(key: key);
 
   void onChanged(int? value) {
     //print(value);
     onRadioChanged(value);
+    loadData(widgetType);
   }
 
   @override
