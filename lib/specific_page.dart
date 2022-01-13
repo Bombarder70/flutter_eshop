@@ -26,8 +26,8 @@ class _SecondPageState extends State<SecondPage> {
 
   // rdaio buttons
   // zoradenie
-  int? radioValue;
-  void setRadioValue(int? value) {
+  int radioValue = 1;
+  void setRadioValue(int value) {
     setState(() {
       radioValue = value;
     });
@@ -67,7 +67,7 @@ class _SecondPageState extends State<SecondPage> {
     return Scaffold(
       appBar: CustomAppBar(),
       body: SingleChildScrollView(
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         child: Column(
           children: [
             Container(
@@ -90,7 +90,7 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 250,
@@ -137,26 +137,19 @@ class FilterItem extends StatelessWidget {
   final String title;
   final IconData icon;
   final Function onRadioChanged;
-  final int? radioValue;
+  final int radioValue;
 
   const FilterItem({
     Key? key,
     required this.title,
     required this.icon,
     required this.onRadioChanged,
-    this.radioValue,
+    required this.radioValue,
   }) : super(key: key);
 
   void onChanged(int? value) {
-    print(value);
+    //print(value);
     onRadioChanged(value);
-    //Whatever happendeed, it was clicked, so call the extra method
-    //eitherRadioTapped();
-
-    /*setState(() {
-      radioGroupValue = value;
-    });*/
-    //return false;
   }
 
   @override
