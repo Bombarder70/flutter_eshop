@@ -17,7 +17,8 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   void initState() {
     super.initState();
-    _loadData(widget.type, "asc");
+    // Nastav na najnovsie
+    _loadData(widget.type, "id", "desc");
   }
 
   //List<dynamic> _products = [];
@@ -42,7 +43,7 @@ class _SecondPageState extends State<SecondPage> {
     return true;
   }*/
 
-  void _loadData(String type, String orderBy) async {
+  void _loadData(String type, String orderName, String orderBy) async {
     var url = Uri(
       scheme: "http",
       host: "10.0.2.2",
@@ -50,6 +51,7 @@ class _SecondPageState extends State<SecondPage> {
       queryParameters: {
         "action": "vsetky_produkty",
         "type": type,
+        "orderName": orderName,
         "orderBy": orderBy
       },
     );
@@ -162,7 +164,14 @@ class FilterItem extends StatelessWidget {
   void onChanged(int? value) {
     //print(value);
     onRadioChanged(value);
-    loadData(widgetType, value == 1 ? "asc" : "desc");
+    var orderName;
+    if (value == 1 || value == 2) {
+      orderName = "price";
+    } else {
+      orderName = "name";
+    }
+
+    loadData(widgetType, orderName, value == 1 || value == 3 ? "asc" : "desc");
   }
 
   @override
@@ -178,7 +187,7 @@ class FilterItem extends StatelessWidget {
                 Column(
                   children: [
                     RadioListTile(
-                      title: const Text('Vzostupne'),
+                      title: const Text('Cena - najlacnejšie'),
                       value: 1,
                       groupValue: radioValue,
                       onChanged: (int? value) {
@@ -186,8 +195,24 @@ class FilterItem extends StatelessWidget {
                       },
                     ),
                     RadioListTile(
-                      title: const Text('Zostupne'),
+                      title: const Text('Cena - najdrahšie'),
                       value: 2,
+                      groupValue: radioValue,
+                      onChanged: (int? value) {
+                        onChanged(value);
+                      },
+                    ),
+                    RadioListTile(
+                      title: const Text('Názov - vzostupne'),
+                      value: 3,
+                      groupValue: radioValue,
+                      onChanged: (int? value) {
+                        onChanged(value);
+                      },
+                    ),
+                    RadioListTile(
+                      title: const Text('Názov - zostupne'),
+                      value: 4,
                       groupValue: radioValue,
                       onChanged: (int? value) {
                         onChanged(value);
