@@ -17,7 +17,7 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   void initState() {
     super.initState();
-    _loadData(widget.type);
+    _loadData(widget.type, "asc");
   }
 
   //List<dynamic> _products = [];
@@ -42,12 +42,16 @@ class _SecondPageState extends State<SecondPage> {
     return true;
   }*/
 
-  void _loadData(String type) async {
+  void _loadData(String type, String orderBy) async {
     var url = Uri(
       scheme: "http",
       host: "10.0.2.2",
       path: "/holes/dia_eshop/web/Admin/index.php",
-      queryParameters: {"action": "vsetky_produkty", "type": type},
+      queryParameters: {
+        "action": "vsetky_produkty",
+        "type": type,
+        "orderBy": orderBy
+      },
     );
 
     var res = await http.get(url);
@@ -158,7 +162,7 @@ class FilterItem extends StatelessWidget {
   void onChanged(int? value) {
     //print(value);
     onRadioChanged(value);
-    loadData(widgetType);
+    loadData(widgetType, value == 1 ? "asc" : "desc");
   }
 
   @override
