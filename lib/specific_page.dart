@@ -27,7 +27,7 @@ class _SecondPageState extends State<SecondPage> {
 
   // rdaio buttons
   // zoradenie
-  int radioValue = 1;
+  int radioValue = 5;
   void setRadioValue(int value) {
     setState(() {
       radioValue = value;
@@ -167,6 +167,8 @@ class FilterItem extends StatelessWidget {
 
     if (value == 1 || value == 2) {
       orderName = "price";
+    } else if (value == 5) {
+      orderName = "id";
     } else {
       orderName = "name";
     }
@@ -179,7 +181,7 @@ class FilterItem extends StatelessWidget {
     return Expanded(
       child: InkWell(
         onTap: () {
-          showDialog<String>(
+          showDialog(
             context: context,
             builder: (BuildContext context) => AlertDialog(
               title: const Text('Zoradiť'),
@@ -192,6 +194,7 @@ class FilterItem extends StatelessWidget {
                       groupValue: radioValue,
                       onChanged: (int? value) {
                         onChanged(value);
+                        Navigator.pop(context, false);
                       },
                     ),
                     RadioListTile(
@@ -200,6 +203,7 @@ class FilterItem extends StatelessWidget {
                       groupValue: radioValue,
                       onChanged: (int? value) {
                         onChanged(value);
+                        Navigator.pop(context, false);
                       },
                     ),
                     RadioListTile(
@@ -208,6 +212,7 @@ class FilterItem extends StatelessWidget {
                       groupValue: radioValue,
                       onChanged: (int? value) {
                         onChanged(value);
+                        Navigator.pop(context, false);
                       },
                     ),
                     RadioListTile(
@@ -216,6 +221,16 @@ class FilterItem extends StatelessWidget {
                       groupValue: radioValue,
                       onChanged: (int? value) {
                         onChanged(value);
+                        Navigator.pop(context, false);
+                      },
+                    ),
+                    RadioListTile(
+                      title: const Text('Nezoradovať'),
+                      value: 5,
+                      groupValue: radioValue,
+                      onChanged: (int? value) {
+                        onChanged(value);
+                        Navigator.pop(context, false);
                       },
                     )
                   ],
