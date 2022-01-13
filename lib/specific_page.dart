@@ -124,6 +124,18 @@ class FilterItem extends StatelessWidget {
     required this.icon,
   }) : super(key: key);
 
+  void onChanged(int? value) {
+    print("Radio has been tapped.");
+
+    //Whatever happendeed, it was clicked, so call the extra method
+    //eitherRadioTapped();
+
+    /*setState(() {
+      radioGroupValue = value;
+    });*/
+    //return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -132,13 +144,26 @@ class FilterItem extends StatelessWidget {
           showDialog<String>(
             context: context,
             builder: (BuildContext context) => AlertDialog(
-              title: const Text('Produkt pridaný do košíka'),
+              title: const Text('Zoradiť'),
               actions: [
                 Column(
                   children: [
-                    ListTile(
-                      title: const Text('Vzostupbne'),
+                    RadioListTile(
+                      title: const Text('Vzostupne'),
+                      value: 1,
+                      groupValue: 1,
+                      onChanged: (int? value) {
+                        onChanged(value);
+                      },
                     ),
+                    RadioListTile(
+                      title: const Text('Zostupne'),
+                      value: 1,
+                      groupValue: 1,
+                      onChanged: (int? value) {
+                        onChanged(value);
+                      },
+                    )
                   ],
                 )
               ],
