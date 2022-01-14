@@ -114,24 +114,25 @@ class _SecondPageState extends State<SecondPage> {
                   alignment: AlignmentDirectional.center,
                   children: [
                     ProductCard(productDetail: _allProducts[index]),
-                    Positioned(
-                      top: 10,
-                      left: 10,
-                      child: Container(
-                        child: const Text(
-                          '-50%',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                    if (int.parse(_allProducts[index].discount) > 0)
+                      Positioned(
+                        top: 10,
+                        left: 10,
+                        child: Container(
+                          child: Text(
+                            "-" + _allProducts[index].discount + "%",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.deepOrange[300],
                           ),
                         ),
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.deepOrange[300],
-                        ),
                       ),
-                    ),
                   ],
                 );
               },
@@ -319,7 +320,9 @@ class ProductCard extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(5),
               child: Text(
-                productDetail.price + "€",
+                (int.parse(productDetail.discount) > 0)
+                    ? productDetail.price + "€"
+                    : "",
                 style: const TextStyle(
                   fontSize: 18,
                   color: Colors.grey,
@@ -328,7 +331,8 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             Text(
-              getPriceDiscount(productDetail.price, "50") + "€",
+              getPriceDiscount(productDetail.price, productDetail.discount) +
+                  "€",
               style: const TextStyle(
                 fontSize: 20,
               ),
