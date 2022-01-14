@@ -35,6 +35,7 @@ class Result {
     required this.count,
     required this.description,
     required this.type,
+    required this.discount,
   });
 
   String id;
@@ -45,6 +46,7 @@ class Result {
   String count;
   String description;
   String type;
+  String discount;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],
@@ -55,6 +57,7 @@ class Result {
         count: json["count"],
         description: json["description"],
         type: json["type"],
+        discount: json["discount"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,5 +69,6 @@ class Result {
         "count": count,
         "description": description,
         "type": type,
+        "discount": discount
       };
 }
