@@ -18,21 +18,6 @@ class FilterItem2 extends StatelessWidget {
     required this.loadData,
   }) : super(key: key);
 
-  /*void onChanged(int? value) {
-    onRadioChanged(value);
-    String orderName;
-
-    if (value == 1 || value == 2) {
-      orderName = "price";
-    } else if (value == 5) {
-      orderName = "id";
-    } else {
-      orderName = "name";
-    }
-
-    loadData(widgetType, orderName, value == 1 || value == 3 ? "asc" : "desc");
-  }*/
-
   void onChecked(bool? value) {
     onCheckboxChanged(value);
   }
@@ -62,65 +47,11 @@ class FilterItem2 extends StatelessWidget {
                           value: checkboxValue,
                           onChanged: (bool? value) {
                             onChecked(value);
+                            Navigator.pop(context, false);
                           },
                         ),
                       ],
                     ),
-                    /*const Text("Podľa farby"),
-                    RadioListTile(
-                      title: const Text('Zelená'),
-                      value: 1,
-                      groupValue: radioValue,
-                      onChanged: (int? value) {
-                        onChanged(value);
-                        Navigator.pop(context, false);
-                      },
-                    ),
-                    RadioListTile(
-                      title: const Text('Červená'),
-                      value: 2,
-                      groupValue: radioValue,
-                      onChanged: (int? value) {
-                        onChanged(value);
-                        Navigator.pop(context, false);
-                      },
-                    ),
-                    RadioListTile(
-                      title: const Text('Fiaľová'),
-                      value: 3,
-                      groupValue: radioValue,
-                      onChanged: (int? value) {
-                        onChanged(value);
-                        Navigator.pop(context, false);
-                      },
-                    ),
-                    RadioListTile(
-                      title: const Text('Hnedá'),
-                      value: 4,
-                      groupValue: radioValue,
-                      onChanged: (int? value) {
-                        onChanged(value);
-                        Navigator.pop(context, false);
-                      },
-                    ),
-                    RadioListTile(
-                      title: const Text('Žltá'),
-                      value: 5,
-                      groupValue: radioValue,
-                      onChanged: (int? value) {
-                        onChanged(value);
-                        Navigator.pop(context, false);
-                      },
-                    ),
-                    RadioListTile(
-                      title: const Text('Modrá'),
-                      value: 5,
-                      groupValue: radioValue,
-                      onChanged: (int? value) {
-                        onChanged(value);
-                        Navigator.pop(context, false);
-                      },
-                    )*/
                   ],
                 )
               ],

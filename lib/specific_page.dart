@@ -41,6 +41,8 @@ class _SecondPageState extends State<SecondPage> {
     setState(() {
       checkboxValue = value;
     });
+
+    _loadData(widget.type, "id", "desc");
   }
 
   List<Result> _allProducts = [];
