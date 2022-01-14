@@ -36,6 +36,13 @@ class _SecondPageState extends State<SecondPage> {
     });
   }
 
+  bool checkboxValue = false;
+  void setCheckboxValue(bool value) {
+    setState(() {
+      checkboxValue = value;
+    });
+  }
+
   List<Result> _allProducts = [];
 
   /*Future<bool> _loadMore() async {
@@ -93,8 +100,8 @@ class _SecondPageState extends State<SecondPage> {
                   FilterItem2(
                     title: "Filtrovať",
                     icon: Icons.filter_alt,
-                    onRadioChanged: setRadioValue,
-                    radioValue: radioValue,
+                    onCheckboxChanged: setCheckboxValue,
+                    checkboxValue: checkboxValue,
                     loadData: _loadData,
                     widgetType: widget.type,
                   ),
