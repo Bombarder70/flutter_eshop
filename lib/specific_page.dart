@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'product.dart';
 
+import 'filter_item2.dart';
+
 class SecondPage extends StatefulWidget {
   final String type;
 
@@ -88,7 +90,7 @@ class _SecondPageState extends State<SecondPage> {
                     loadData: _loadData,
                     widgetType: widget.type,
                   ),
-                  FilterItem(
+                  FilterItem2(
                     title: "Filtrovať",
                     icon: Icons.filter_alt,
                     onRadioChanged: setRadioValue,
