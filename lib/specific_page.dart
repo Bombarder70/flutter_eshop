@@ -20,7 +20,7 @@ class _SecondPageState extends State<SecondPage> {
   void initState() {
     super.initState();
     // Nastav na najnovsie
-    _loadData(widget.type, "id", "desc");
+    _loadData(widget.type, "id", "desc", "false");
   }
 
   //List<dynamic> _products = [];
@@ -42,12 +42,13 @@ class _SecondPageState extends State<SecondPage> {
       checkboxValue = value;
     });
 
-    _loadData(widget.type, "id", "desc");
+    _loadData(widget.type, "id", "desc", checkboxValue.toString());
   }
 
   List<Result> _allProducts = [];
 
-  void _loadData(String type, String orderName, String orderBy) async {
+  void _loadData(
+      String type, String orderName, String orderBy, String akcia) async {
     var url = Uri(
       scheme: "http",
       host: "10.0.2.2",
@@ -56,7 +57,8 @@ class _SecondPageState extends State<SecondPage> {
         "action": "vsetky_produkty",
         "type": type,
         "orderName": orderName,
-        "orderBy": orderBy
+        "orderBy": orderBy,
+        "zobraz_iba_akciove": akcia
       },
     );
 
