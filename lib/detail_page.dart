@@ -43,6 +43,13 @@ class DetailPageState extends State<DetailPage> {
     print(res.body);
   }
 
+  String getPriceDiscount(String price, String discount) {
+    double discountDouble = num.tryParse(discount)!.toDouble();
+    double priceDouble = num.tryParse(price)!.toDouble();
+
+    return ((priceDouble / 100) * (100 - discountDouble)).toStringAsFixed(2);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,27 +64,48 @@ class DetailPageState extends State<DetailPage> {
                   widget.productDetail.image,
             ),
           ),
-          Heading(title: widget.productDetail.name),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(40.0),
+            child: Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              margin: const EdgeInsets.only(
+                left: 50,
+                right: 50,
+                top: 10,
+                bottom: 10,
+              ),
+              color: Colors.deepOrange[200],
+              child: Text(
+                widget.productDetail.name,
+                style: const TextStyle(
+                  fontSize: 26,
+                ),
+              ),
+            ),
+          ),
           Container(
+            margin: const EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
+                Container(
+                  margin: const EdgeInsets.only(right: 5),
                   child: Text(
-                    widget.productDetail.price,
-                    style: TextStyle(fontSize: 24),
+                    getPriceDiscount(
+                          widget.productDetail.price,
+                          widget.productDetail.discount,
+                        ) +
+                        "€",
+                    style: const TextStyle(fontSize: 24),
                   ),
                 ),
-                Expanded(
-                  child: Text(
-                    "xxx",
-                    style: TextStyle(fontSize: 24),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    "xxx",
-                    style: TextStyle(fontSize: 24),
+                Text(
+                  widget.productDetail.price + "€",
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                    decoration: TextDecoration.lineThrough,
                   ),
                 ),
               ],
