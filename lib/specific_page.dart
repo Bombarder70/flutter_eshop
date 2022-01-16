@@ -118,19 +118,28 @@ class _SecondPageState extends State<SecondPage> {
                   alignment: AlignmentDirectional.center,
                   children: [
                     ProductCard(productDetail: _allProducts[index]),
-                    if (int.parse(_allProducts[index].discount) > 0)
+                    if (int.parse(_allProducts[index].discount) > 0 ||
+                        int.parse(_allProducts[index].count) <= 3)
                       Positioned(
                         top: 10,
                         left: 10,
                         child: Container(
                           child: (int.parse(_allProducts[index].count) > 0)
-                              ? Text(
-                                  "-" + _allProducts[index].discount + "%",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
+                              ? (int.parse(_allProducts[index].count) < 4)
+                                  ? const Text(
+                                      "Menej ako 5 kusov",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                  : Text(
+                                      "-" + _allProducts[index].discount + "%",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
                               : const Text(
                                   "Nedostupný",
                                   style: TextStyle(
@@ -142,7 +151,9 @@ class _SecondPageState extends State<SecondPage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: (int.parse(_allProducts[index].count) > 0)
-                                ? Colors.deepOrange[300]
+                                ? (int.parse(_allProducts[index].count) < 4)
+                                    ? Colors.yellow
+                                    : Colors.deepOrange[300]
                                 : Colors.red[900],
                           ),
                         ),
