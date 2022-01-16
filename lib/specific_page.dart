@@ -201,7 +201,12 @@ class FilterItem extends StatelessWidget {
       orderName = "name";
     }
 
-    loadData(widgetType, orderName, value == 1 || value == 3 ? "asc" : "desc");
+    loadData(
+      widgetType,
+      orderName,
+      value == 1 || value == 3 ? "asc" : "desc",
+      "false",
+    );
   }
 
   @override
