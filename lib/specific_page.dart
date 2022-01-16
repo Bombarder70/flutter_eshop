@@ -47,13 +47,6 @@ class _SecondPageState extends State<SecondPage> {
 
   List<Result> _allProducts = [];
 
-  /*Future<bool> _loadMore() async {
-    await Future.delayed(const Duration(seconds: 0, milliseconds: 500));
-    _loadData();
-
-    return true;
-  }*/
-
   void _loadData(String type, String orderName, String orderBy) async {
     var url = Uri(
       scheme: "http",
@@ -130,17 +123,27 @@ class _SecondPageState extends State<SecondPage> {
                         top: 10,
                         left: 10,
                         child: Container(
-                          child: Text(
-                            "-" + _allProducts[index].discount + "%",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          child: (int.parse(_allProducts[index].count) > 0)
+                              ? Text(
+                                  "-" + _allProducts[index].discount + "%",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              : const Text(
+                                  "Nedostupný",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.deepOrange[300],
+                            color: (int.parse(_allProducts[index].count) > 0)
+                                ? Colors.deepOrange[300]
+                                : Colors.red[900],
                           ),
                         ),
                       ),
