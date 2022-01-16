@@ -55,23 +55,42 @@ class MyApp extends StatelessWidget {
             ),
             Row(
               children: [
-                AllCategoriesCard(),
-                AllCategoriesCard(),
-                AllCategoriesCard(),
+                AllCategoriesCard(
+                  image:
+                      "https://cdn-icons-png.flaticon.com/512/5499/5499206.png",
+                ),
+                AllCategoriesCard(
+                  image:
+                      "http://www.clker.com/cliparts/S/j/5/K/N/Z/yellow-t-shirt-icon-md.png",
+                ),
+                AllCategoriesCard(
+                  image: "https://www.pngrepo.com/png/78624/512/leggins.png",
+                ),
               ],
             ),
             Row(
               children: [
-                AllCategoriesCard(),
-                AllCategoriesCard(),
-                AllCategoriesCard(),
+                AllCategoriesCard(
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/77/77443.png"),
+                AllCategoriesCard(
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/263/263806.png"),
+                AllCategoriesCard(
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/120/120049.png"),
               ],
             ),
             Row(
               children: [
-                AllCategoriesCard(),
-                AllCategoriesCard(),
-                AllCategoriesCard(),
+                AllCategoriesCard(
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/124/124666.png"),
+                AllCategoriesCard(
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/1176/1176990.png"),
+                AllCategoriesCard(
+                    image: "http://cdn.onlinewebfonts.com/svg/img_59123.png"),
               ],
             ),
             Container(
@@ -105,7 +124,7 @@ class MyApp extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.deepOrange[200],
                 ),
-                child: const Text('Drawer Header'),
+                child: const Text('eShop kupujte to najlepšie'),
               ),
               const DrawerItem(title: "Všetko", size: 22, type: "3"),
               const Divider(
@@ -136,9 +155,12 @@ class HeaderCard extends StatelessWidget {
   final String img;
   final String type;
 
-  const HeaderCard(
-      {Key? key, required this.title, required this.img, required this.type})
-      : super(key: key);
+  const HeaderCard({
+    Key? key,
+    required this.title,
+    required this.img,
+    required this.type,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -179,23 +201,25 @@ class HeaderCard extends StatelessWidget {
 }
 
 class AllCategoriesCard extends StatelessWidget {
-  const AllCategoriesCard({
-    Key? key,
-  }) : super(key: key);
+  final String image;
+
+  const AllCategoriesCard({Key? key, required this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
+        height: 85,
         decoration: BoxDecoration(
-          borderRadius: new BorderRadius.only(
-            topLeft: const Radius.circular(40.0),
-            topRight: const Radius.circular(40.0),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(40.0),
+            topRight: Radius.circular(40.0),
           ),
+          color: Colors.grey[350],
         ),
         padding: const EdgeInsets.all(5),
         margin: const EdgeInsets.all(5),
-        child: Image.network('https://picsum.photos/250?image=9'),
+        child: Image.network(image),
       ),
     );
   }
