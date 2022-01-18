@@ -58,7 +58,7 @@ class _SecondPageState extends State<SecondPage> {
         "type": type,
         "orderName": orderName,
         "orderBy": orderBy,
-        "zobraz_iba_akciove": akcia
+        "show_only_discounts": akcia
       },
     );
 
