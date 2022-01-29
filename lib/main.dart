@@ -122,7 +122,7 @@ class MyApp extends StatelessWidget {
             children: [
               DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.deepOrange[200],
+                  color: Colors.tealAccent[700],
                 ),
                 child: const Text('eShop kupujte to najlepšie'),
               ),
@@ -178,7 +178,7 @@ class HeaderCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 45,
-                backgroundColor: Colors.deepOrange[200],
+                backgroundColor: Colors.tealAccent[700],
                 child: ClipOval(
                   child: Image.asset(
                     'assets/files/' + img + '.png',

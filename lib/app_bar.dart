@@ -22,7 +22,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         ),
       ),
       centerTitle: true,
-      backgroundColor: Colors.deepOrange[200],
+      backgroundColor: Colors.tealAccent[700],
       actions: [
         if (showActions)
           IconButton(

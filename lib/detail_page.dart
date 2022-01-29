@@ -75,7 +75,7 @@ class DetailPageState extends State<DetailPage> {
                 top: 10,
                 bottom: 10,
               ),
-              color: Colors.deepOrange[200],
+              color: Colors.tealAccent[700],
               child: Text(
                 widget.productDetail.name,
                 style: const TextStyle(
@@ -122,15 +122,15 @@ class DetailPageState extends State<DetailPage> {
               ratingWidget: RatingWidget(
                 full: Icon(
                   Icons.star_rate,
-                  color: Colors.deepOrange[200],
+                  color: Colors.tealAccent[700],
                 ),
                 half: Icon(
                   Icons.star_half,
-                  color: Colors.deepOrange[200],
+                  color: Colors.tealAccent[700],
                 ),
                 empty: Icon(
                   Icons.star_border_sharp,
-                  color: Colors.deepOrange[200],
+                  color: Colors.tealAccent[700],
                 ),
               ),
               itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -169,7 +169,7 @@ class DetailPageState extends State<DetailPage> {
           ),
           Container(
             padding: const EdgeInsets.all(10),
-            color: Colors.deepOrange[200],
+            color: Colors.tealAccent[700],
             child: Column(
               children: [
                 Container(
@@ -187,7 +187,7 @@ class DetailPageState extends State<DetailPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: (int.parse(widget.productDetail.count) > 0)
-            ? Colors.deepOrange[200]
+            ? Colors.tealAccent[700]
             : Colors.red[900],
         onPressed: () {
           if ((int.parse(widget.productDetail.count) > 0)) {

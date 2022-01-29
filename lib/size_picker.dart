@@ -29,7 +29,7 @@ class SizeSelector extends StatelessWidget {
                 width: 50,
                 decoration: BoxDecoration(
                     color: selectedSize == sizes[index]
-                        ? Colors.deepOrange[200]
+                        ? Colors.tealAccent[700]
                         : Colors.grey[300],
                     borderRadius: BorderRadius.circular(3)),
                 child: Align(

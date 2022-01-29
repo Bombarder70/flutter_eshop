@@ -342,9 +342,9 @@ class ProductCard extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 5),
               child: Text(
                 productDetail.name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 22,
-                  color: Colors.deepOrange[300],
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -366,7 +366,9 @@ class ProductCard extends StatelessWidget {
               getPriceDiscount(productDetail.price, productDetail.discount) +
                   "€",
               style: const TextStyle(
-                fontSize: 20,
+                fontSize: 30,
+                color: Colors.teal,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],

@@ -118,7 +118,7 @@ class CartPageState extends State<CartPage> {
                           "(" + cenaSpolu.toString() + "€)",
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.deepOrange[400],
+                            color: Colors.teal,
                           ),
                         ),
                       ],
@@ -144,10 +144,16 @@ class CartPageState extends State<CartPage> {
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.orange),
+                            MaterialStateProperty.all<Color>(Colors.teal),
                       ),
                       onPressed: () => _placeOrder(),
-                      child: const Text('Place order'),
+                      child: const Text(
+                        'Place order',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
                     ),
                   ),
                 )
@@ -238,8 +244,7 @@ class CartItem extends StatelessWidget {
                         ),
                         Text(
                           productDetail.price + "€",
-                          style: TextStyle(
-                              fontSize: 18, color: Colors.deepOrange[400]),
+                          style: TextStyle(fontSize: 18, color: Colors.teal),
                         ),
                       ],
                     ),
@@ -268,8 +273,8 @@ class CartItem extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 5),
                 child: IconButton(
                   onPressed: () => _removeFromCart(productDetail.id),
-                  color: Colors.red[700],
-                  icon: const Icon(Icons.close),
+                  color: Colors.teal,
+                  icon: const Icon(Icons.close, size: 30),
                   tooltip: 'Delete item from cart',
                 ),
               ),
