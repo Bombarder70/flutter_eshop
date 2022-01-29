@@ -139,7 +139,7 @@ class DetailPageState extends State<DetailPage> {
               },
             ),
           ),
-          const Heading(title: "Veľkosť produktu"),
+          const Heading(title: "Products size"),
           Container(
             margin: const EdgeInsets.all(10),
             child: SizeSelector(
@@ -150,7 +150,7 @@ class DetailPageState extends State<DetailPage> {
               },
             ),
           ),
-          const Heading(title: "Farba produktu"),
+          const Heading(title: "Product color"),
           Container(
             alignment: Alignment.bottomCenter,
             padding: const EdgeInsets.only(left: 50),
@@ -174,7 +174,7 @@ class DetailPageState extends State<DetailPage> {
               children: [
                 Container(
                   margin: const EdgeInsets.all(10),
-                  child: const Heading(title: "Popis produktu"),
+                  child: const Heading(title: "Product description"),
                 ),
                 Text(
                   widget.productDetail.description,
@@ -195,11 +195,11 @@ class DetailPageState extends State<DetailPage> {
             showDialog<String>(
               context: context,
               builder: (BuildContext context) => AlertDialog(
-                title: const Text('Produkt pridaný do košíka'),
+                title: const Text('Product was added to cart'),
                 actions: <Widget>[
                   TextButton(
-                    onPressed: () => Navigator.pop(context, 'Späť k nákupu'),
-                    child: const Text('Späť k nákupu'),
+                    onPressed: () => Navigator.pop(context, 'Back to shopping'),
+                    child: const Text('Back to shopping'),
                   ),
                   TextButton(
                     onPressed: () => Navigator.push(
@@ -210,7 +210,7 @@ class DetailPageState extends State<DetailPage> {
                         ),
                       ),
                     ),
-                    child: const Text('Zobraziť košík'),
+                    child: const Text('Show cart'),
                   ),
                 ],
               ),
@@ -220,7 +220,7 @@ class DetailPageState extends State<DetailPage> {
               context: context,
               builder: (BuildContext context) => const AlertDialog(
                 title: Text(
-                  'Bohužiaľ tento produkt je nedostupný',
+                  'We are sorry this product is unavailable',
                   style: TextStyle(color: Colors.red),
                 ),
               ),
@@ -229,8 +229,8 @@ class DetailPageState extends State<DetailPage> {
         },
         icon: const Icon(Icons.shopping_cart),
         label: (int.parse(widget.productDetail.count) > 0)
-            ? const Text('Pridať do košíka')
-            : const Text('Nedostupný'),
+            ? const Text('Add to cart')
+            : const Text('Unavailable'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

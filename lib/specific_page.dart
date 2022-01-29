@@ -222,7 +222,7 @@ class FilterItem extends StatelessWidget {
                 Column(
                   children: [
                     RadioListTile(
-                      title: const Text('Cena - najlacnejšie'),
+                      title: const Text('Price - cheaper'),
                       value: 1,
                       groupValue: radioValue,
                       onChanged: (int? value) {
@@ -231,7 +231,7 @@ class FilterItem extends StatelessWidget {
                       },
                     ),
                     RadioListTile(
-                      title: const Text('Cena - najdrahšie'),
+                      title: const Text('Price - most expensive'),
                       value: 2,
                       groupValue: radioValue,
                       onChanged: (int? value) {
@@ -240,7 +240,7 @@ class FilterItem extends StatelessWidget {
                       },
                     ),
                     RadioListTile(
-                      title: const Text('Názov - vzostupne'),
+                      title: const Text('Name - ascending'),
                       value: 3,
                       groupValue: radioValue,
                       onChanged: (int? value) {
@@ -249,7 +249,7 @@ class FilterItem extends StatelessWidget {
                       },
                     ),
                     RadioListTile(
-                      title: const Text('Názov - zostupne'),
+                      title: const Text('Name - descending'),
                       value: 4,
                       groupValue: radioValue,
                       onChanged: (int? value) {
@@ -258,7 +258,7 @@ class FilterItem extends StatelessWidget {
                       },
                     ),
                     RadioListTile(
-                      title: const Text('Nezoradovať'),
+                      title: const Text('Do not sort'),
                       value: 5,
                       groupValue: radioValue,
                       onChanged: (int? value) {

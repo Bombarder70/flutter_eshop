@@ -38,7 +38,7 @@ class FilterItem2 extends StatelessWidget {
                       children: [
                         const Expanded(
                           child: Text(
-                            "Zobraziť iba akciové produkty",
+                            "Show only discount products",
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
