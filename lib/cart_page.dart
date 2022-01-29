@@ -100,12 +100,12 @@ class CartPageState extends State<CartPage> {
                       children: [
                         const Expanded(
                           child: Text(
-                            "Košík",
+                            "Cart",
                             style: TextStyle(fontSize: 26),
                           ),
                         ),
                         Text(
-                          _allProducts.length.toString() + " položky ",
+                          _allProducts.length.toString() + " items ",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -144,7 +144,7 @@ class CartPageState extends State<CartPage> {
                             MaterialStateProperty.all<Color>(Color(0xa8329d)),
                       ),
                       onPressed: () => _placeOrder(),
-                      child: const Text('Objednať'),
+                      child: const Text('Place order'),
                     ),
                   ),
                 )
@@ -229,7 +229,7 @@ class CartItem extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          "Cena: ",
+                          "Price: ",
                           style:
                               TextStyle(fontSize: 18, color: Colors.grey[600]),
                         ),
