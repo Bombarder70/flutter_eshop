@@ -103,7 +103,7 @@ class CartPageState extends State<CartPage> {
                       children: [
                         const Expanded(
                           child: Text(
-                            "Cart",
+                            "Shopping Cart",
                             style: TextStyle(fontSize: 26),
                           ),
                         ),

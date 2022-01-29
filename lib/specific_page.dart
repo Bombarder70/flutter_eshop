@@ -87,7 +87,7 @@ class _SecondPageState extends State<SecondPage> {
               child: Row(
                 children: [
                   FilterItem(
-                    title: "Zoradiť",
+                    title: "Sort",
                     icon: Icons.sort,
                     onRadioChanged: setRadioValue,
                     radioValue: radioValue,
@@ -95,7 +95,7 @@ class _SecondPageState extends State<SecondPage> {
                     widgetType: widget.type,
                   ),
                   FilterItem2(
-                    title: "Filtrovať",
+                    title: "Filter",
                     icon: Icons.filter_alt,
                     onCheckboxChanged: setCheckboxValue,
                     checkboxValue: checkboxValue,
@@ -129,7 +129,7 @@ class _SecondPageState extends State<SecondPage> {
                           child: (int.parse(_allProducts[index].count) > 0)
                               ? (int.parse(_allProducts[index].count) < 4)
                                   ? const Text(
-                                      "Menej ako 5 kusov",
+                                      "Less than 5",
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold,
@@ -143,7 +143,7 @@ class _SecondPageState extends State<SecondPage> {
                                       ),
                                     )
                               : const Text(
-                                  "Nedostupný",
+                                  "Unavailable",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
