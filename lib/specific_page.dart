@@ -120,28 +120,19 @@ class _SecondPageState extends State<SecondPage> {
                   alignment: AlignmentDirectional.center,
                   children: [
                     ProductCard(productDetail: _allProducts[index]),
-                    if (int.parse(_allProducts[index].discount) > 0 ||
-                        int.parse(_allProducts[index].count) <= 3)
+                    if (int.parse(_allProducts[index].discount) > 0)
                       Positioned(
                         top: 10,
                         left: 10,
                         child: Container(
                           child: (int.parse(_allProducts[index].count) > 0)
-                              ? (int.parse(_allProducts[index].count) < 4)
-                                  ? const Text(
-                                      "Less than 5",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )
-                                  : Text(
-                                      "-" + _allProducts[index].discount + "%",
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )
+                              ? Text(
+                                  "-" + _allProducts[index].discount + "%",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
                               : const Text(
                                   "Unavailable",
                                   style: TextStyle(
@@ -153,9 +144,7 @@ class _SecondPageState extends State<SecondPage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: (int.parse(_allProducts[index].count) > 0)
-                                ? (int.parse(_allProducts[index].count) < 4)
-                                    ? Colors.yellow
-                                    : Colors.deepOrange[300]
+                                ? Colors.teal
                                 : Colors.red[900],
                           ),
                         ),
@@ -351,24 +340,48 @@ class ProductCard extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.all(5),
-              child: Text(
-                (int.parse(productDetail.discount) > 0)
-                    ? productDetail.price + "€"
-                    : "",
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey,
-                  decoration: TextDecoration.lineThrough,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(right: 5),
+                    child: Text(
+                      (int.parse(productDetail.discount) > 0)
+                          ? productDetail.price + "€"
+                          : "",
+                      style: const TextStyle(
+                        fontSize: 22,
+                        color: Colors.grey,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    getPriceDiscount(
+                            productDetail.price, productDetail.discount) +
+                        "€",
+                    style: const TextStyle(
+                      fontSize: 26,
+                      color: Colors.teal,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
-            Text(
-              getPriceDiscount(productDetail.price, productDetail.discount) +
-                  "€",
-              style: const TextStyle(
-                fontSize: 30,
-                color: Colors.teal,
-                fontWeight: FontWeight.bold,
+            Container(
+              padding: const EdgeInsets.only(top: 2),
+              child: Text(
+                (int.parse(productDetail.count) >= 5)
+                    ? "In stock"
+                    : "Less than 5",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: (int.parse(productDetail.count) >= 5)
+                      ? Colors.grey
+                      : Colors.amber[600],
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
