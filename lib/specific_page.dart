@@ -20,7 +20,7 @@ class _SecondPageState extends State<SecondPage> {
   void initState() {
     super.initState();
     // Nastav na najnovsie
-    _loadData(widget.type, "id", "desc");
+    _loadData(widget.type, "id", "desc", "false");
   }
 
   //List<dynamic> _products = [];
@@ -42,19 +42,13 @@ class _SecondPageState extends State<SecondPage> {
       checkboxValue = value;
     });
 
-    _loadData(widget.type, "id", "desc");
+    _loadData(widget.type, "id", "desc", checkboxValue.toString());
   }
 
   List<Result> _allProducts = [];
 
-  /*Future<bool> _loadMore() async {
-    await Future.delayed(const Duration(seconds: 0, milliseconds: 500));
-    _loadData();
-
-    return true;
-  }*/
-
-  void _loadData(String type, String orderName, String orderBy) async {
+  void _loadData(
+      String type, String orderName, String orderBy, String akcia) async {
     var url = Uri(
       scheme: "http",
       host: "10.0.2.2",
@@ -63,7 +57,8 @@ class _SecondPageState extends State<SecondPage> {
         "action": "vsetky_produkty",
         "type": type,
         "orderName": orderName,
-        "orderBy": orderBy
+        "orderBy": orderBy,
+        "show_only_discounts": akcia
       },
     );
 
@@ -125,22 +120,43 @@ class _SecondPageState extends State<SecondPage> {
                   alignment: AlignmentDirectional.center,
                   children: [
                     ProductCard(productDetail: _allProducts[index]),
-                    if (int.parse(_allProducts[index].discount) > 0)
+                    if (int.parse(_allProducts[index].discount) > 0 ||
+                        int.parse(_allProducts[index].count) <= 3)
                       Positioned(
                         top: 10,
                         left: 10,
                         child: Container(
-                          child: Text(
-                            "-" + _allProducts[index].discount + "%",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          child: (int.parse(_allProducts[index].count) > 0)
+                              ? (int.parse(_allProducts[index].count) < 4)
+                                  ? const Text(
+                                      "Menej ako 5 kusov",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                  : Text(
+                                      "-" + _allProducts[index].discount + "%",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                              : const Text(
+                                  "Nedostupný",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.deepOrange[300],
+                            color: (int.parse(_allProducts[index].count) > 0)
+                                ? (int.parse(_allProducts[index].count) < 4)
+                                    ? Colors.yellow
+                                    : Colors.deepOrange[300]
+                                : Colors.red[900],
                           ),
                         ),
                       ),
@@ -185,7 +201,12 @@ class FilterItem extends StatelessWidget {
       orderName = "name";
     }
 
-    loadData(widgetType, orderName, value == 1 || value == 3 ? "asc" : "desc");
+    loadData(
+      widgetType,
+      orderName,
+      value == 1 || value == 3 ? "asc" : "desc",
+      "false",
+    );
   }
 
   @override

@@ -34,6 +34,9 @@ class CartPageState extends State<CartPage> {
 
   void _placeOrder() {
     getCartIdPlaceOrder(_placeOrderHttp);
+    setState(() {
+      _allProducts = [];
+    });
   }
 
   void _placeOrderHttp(String idCart) async {
@@ -141,7 +144,7 @@ class CartPageState extends State<CartPage> {
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all<Color>(Color(0xa8329d)),
+                            MaterialStateProperty.all<Color>(Colors.orange),
                       ),
                       onPressed: () => _placeOrder(),
                       child: const Text('Place order'),

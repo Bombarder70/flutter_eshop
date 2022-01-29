@@ -43,6 +43,13 @@ class DetailPageState extends State<DetailPage> {
     print(res.body);
   }
 
+  String getPriceDiscount(String price, String discount) {
+    double discountDouble = num.tryParse(discount)!.toDouble();
+    double priceDouble = num.tryParse(price)!.toDouble();
+
+    return ((priceDouble / 100) * (100 - discountDouble)).toStringAsFixed(2);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,27 +64,48 @@ class DetailPageState extends State<DetailPage> {
                   widget.productDetail.image,
             ),
           ),
-          Heading(title: widget.productDetail.name),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(40.0),
+            child: Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              margin: const EdgeInsets.only(
+                left: 50,
+                right: 50,
+                top: 10,
+                bottom: 10,
+              ),
+              color: Colors.deepOrange[200],
+              child: Text(
+                widget.productDetail.name,
+                style: const TextStyle(
+                  fontSize: 26,
+                ),
+              ),
+            ),
+          ),
           Container(
+            margin: const EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
+                Container(
+                  margin: const EdgeInsets.only(right: 5),
                   child: Text(
-                    widget.productDetail.price,
-                    style: TextStyle(fontSize: 24),
+                    getPriceDiscount(
+                          widget.productDetail.price,
+                          widget.productDetail.discount,
+                        ) +
+                        "€",
+                    style: const TextStyle(fontSize: 24),
                   ),
                 ),
-                Expanded(
-                  child: Text(
-                    "xxx",
-                    style: TextStyle(fontSize: 24),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    "xxx",
-                    style: TextStyle(fontSize: 24),
+                Text(
+                  widget.productDetail.price + "€",
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                    decoration: TextDecoration.lineThrough,
                   ),
                 ),
               ],
@@ -158,35 +186,51 @@ class DetailPageState extends State<DetailPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.deepOrange[200],
+        backgroundColor: (int.parse(widget.productDetail.count) > 0)
+            ? Colors.deepOrange[200]
+            : Colors.red[900],
         onPressed: () {
-          _addToCart(widget.productDetail.id);
-          showDialog<String>(
-            context: context,
-            builder: (BuildContext context) => AlertDialog(
-              title: const Text('Produkt pridaný do košíka'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.pop(context, 'Späť k nákupu'),
-                  child: const Text('Späť k nákupu'),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute<CartPage>(
-                      builder: (BuildContext context) => const CartPage(
-                        planetDetail: {"name": "Test"},
+          if ((int.parse(widget.productDetail.count) > 0)) {
+            _addToCart(widget.productDetail.id);
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text('Produkt pridaný do košíka'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Späť k nákupu'),
+                    child: const Text('Späť k nákupu'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute<CartPage>(
+                        builder: (BuildContext context) => const CartPage(
+                          planetDetail: {"name": "Test"},
+                        ),
                       ),
                     ),
+                    child: const Text('Zobraziť košík'),
                   ),
-                  child: const Text('Zobraziť košík'),
+                ],
+              ),
+            );
+          } else {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => const AlertDialog(
+                title: Text(
+                  'Bohužiaľ tento produkt je nedostupný',
+                  style: TextStyle(color: Colors.red),
                 ),
-              ],
-            ),
-          );
+              ),
+            );
+          }
         },
         icon: const Icon(Icons.shopping_cart),
-        label: const Text('Pridať do košíka'),
+        label: (int.parse(widget.productDetail.count) > 0)
+            ? const Text('Pridať do košíka')
+            : const Text('Nedostupný'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
