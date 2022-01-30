@@ -169,6 +169,7 @@ class DetailPageState extends State<DetailPage> {
           ),
           Container(
             padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.only(bottom: 80),
             color: Colors.tealAccent[700],
             child: Column(
               children: [

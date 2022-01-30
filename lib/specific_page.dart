@@ -374,7 +374,9 @@ class ProductCard extends StatelessWidget {
               child: Text(
                 (int.parse(productDetail.count) >= 5)
                     ? "In stock"
-                    : "Less than 5",
+                    : (int.parse(productDetail.count) == 0)
+                        ? "Storage 20.12.2022"
+                        : "Less than 5",
                 style: TextStyle(
                   fontSize: 18,
                   color: (int.parse(productDetail.count) >= 5)
