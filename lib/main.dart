@@ -33,12 +33,33 @@ class MyApp extends StatelessWidget {
                 HeaderCard(title: "Children", img: "child", type: "3"),
               ],
             ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                "Categories",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-              ),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: const Text(
+                    "Categories",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "All",
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             Container(
               height: 200,
