@@ -16,11 +16,31 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
+  ScrollController controller = ScrollController();
+  int currentPage = 1;
+
   @override
   void initState() {
     super.initState();
     // Nastav na najnovsie
-    _loadData(widget.type, "id", "desc", "false");
+    _loadData(widget.type, "id", "desc", "false", "1");
+    controller.addListener(handleScrolling);
+  }
+
+  void handleScrolling() {
+    if (controller.offset >= controller.position.maxScrollExtent) {
+      _loadAnotherData(currentPage + 1);
+    }
+  }
+
+  void _loadAnotherData(int page) {
+    _loadData(
+      widget.type,
+      "id",
+      "desc",
+      checkboxValue.toString(),
+      page.toString(),
+    );
   }
 
   //List<dynamic> _products = [];
@@ -42,13 +62,15 @@ class _SecondPageState extends State<SecondPage> {
       checkboxValue = value;
     });
 
-    _loadData(widget.type, "id", "desc", checkboxValue.toString());
+    _loadData(widget.type, "id", "desc", checkboxValue.toString(), "1");
   }
 
   List<Result> _allProducts = [];
 
-  void _loadData(
-      String type, String orderName, String orderBy, String akcia) async {
+  String page = "1";
+
+  void _loadData(String type, String orderName, String orderBy, String akcia,
+      String? page) async {
     var url = Uri(
       scheme: "http",
       host: "10.0.2.2",
@@ -69,8 +91,10 @@ class _SecondPageState extends State<SecondPage> {
 
     nextPage = "stop";
 
-    setState(() {
-      _allProducts = products.results;
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        _allProducts = products.results;
+      });
     });
   }
 
@@ -105,54 +129,63 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 250,
-                childAspectRatio: 3 / 4.25,
-                crossAxisSpacing: 0,
-                mainAxisSpacing: 0,
-              ),
-              itemCount: _allProducts.length,
-              itemBuilder: (context, index) {
-                return Stack(
-                  alignment: AlignmentDirectional.center,
-                  children: [
-                    ProductCard(productDetail: _allProducts[index]),
-                    if (int.parse(_allProducts[index].discount) > 0)
-                      Positioned(
-                        top: 10,
-                        left: 10,
-                        child: Container(
-                          child: (int.parse(_allProducts[index].count) > 0)
-                              ? Text(
-                                  "-" + _allProducts[index].discount + "%",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              : const Text(
-                                  "Unavailable",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+            _allProducts.isNotEmpty
+                ? GridView.builder(
+                    controller: controller,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 250,
+                      childAspectRatio: 3 / 4.25,
+                      crossAxisSpacing: 0,
+                      mainAxisSpacing: 0,
+                    ),
+                    itemCount: _allProducts.length,
+                    itemBuilder: (context, index) {
+                      return Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: [
+                          ProductCard(productDetail: _allProducts[index]),
+                          if (int.parse(_allProducts[index].discount) > 0)
+                            Positioned(
+                              top: 10,
+                              left: 10,
+                              child: Container(
+                                child:
+                                    (int.parse(_allProducts[index].count) > 0)
+                                        ? Text(
+                                            "-" +
+                                                _allProducts[index].discount +
+                                                "%",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                        : const Text(
+                                            "Unavailable",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color:
+                                      (int.parse(_allProducts[index].count) > 0)
+                                          ? Colors.teal
+                                          : Colors.red[900],
                                 ),
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: (int.parse(_allProducts[index].count) > 0)
-                                ? Colors.teal
-                                : Colors.red[900],
-                          ),
-                        ),
-                      ),
-                  ],
-                );
-              },
-            ),
+                              ),
+                            ),
+                        ],
+                      );
+                    },
+                  )
+                : Image.network(
+                    "https://i.pinimg.com/originals/2c/bb/5e/2cbb5e95b97aa2b496f6eaec84b9240d.gif"),
           ],
         ),
       ),
