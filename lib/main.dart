@@ -28,9 +28,9 @@ class MyApp extends StatelessWidget {
           children: [
             Row(
               children: [
-                HeaderCard(title: "Men", img: "men", type: "1"),
-                HeaderCard(title: "Womans", img: "women", type: "2"),
-                HeaderCard(title: "Children", img: "child", type: "3"),
+                HeaderCard(title: "Men", img: "men2", type: "1"),
+                HeaderCard(title: "Womans", img: "women2", type: "2"),
+                HeaderCard(title: "Children", img: "child2", type: "3"),
               ],
             ),
             Row(
