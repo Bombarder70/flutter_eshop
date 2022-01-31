@@ -1,6 +1,7 @@
 import 'package:eshop_app/product.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/painting.dart';
 import 'specific_page.dart';
 import 'app_bar.dart';
 import 'get_cart_id.dart';
@@ -33,6 +34,13 @@ class MyApp extends StatelessWidget {
               ],
             ),
             Container(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                "Categories",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              ),
+            ),
+            Container(
               height: 200,
               margin: EdgeInsets.only(left: 2, right: 2, top: 20, bottom: 20),
               child: FittedBox(
@@ -52,46 +60,6 @@ class MyApp extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            Row(
-              children: [
-                AllCategoriesCard(
-                  image:
-                      "https://cdn-icons-png.flaticon.com/512/5499/5499206.png",
-                ),
-                AllCategoriesCard(
-                  image:
-                      "http://www.clker.com/cliparts/S/j/5/K/N/Z/yellow-t-shirt-icon-md.png",
-                ),
-                AllCategoriesCard(
-                  image: "https://www.pngrepo.com/png/78624/512/leggins.png",
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                AllCategoriesCard(
-                    image:
-                        "https://cdn-icons-png.flaticon.com/512/77/77443.png"),
-                AllCategoriesCard(
-                    image:
-                        "https://cdn-icons-png.flaticon.com/512/263/263806.png"),
-                AllCategoriesCard(
-                    image:
-                        "https://cdn-icons-png.flaticon.com/512/120/120049.png"),
-              ],
-            ),
-            Row(
-              children: [
-                AllCategoriesCard(
-                    image:
-                        "https://cdn-icons-png.flaticon.com/512/124/124666.png"),
-                AllCategoriesCard(
-                    image:
-                        "https://cdn-icons-png.flaticon.com/512/1176/1176990.png"),
-                AllCategoriesCard(
-                    image: "http://cdn.onlinewebfonts.com/svg/img_59123.png"),
-              ],
             ),
             Container(
               height: 200,
@@ -116,34 +84,28 @@ class MyApp extends StatelessWidget {
             ),
           ],
         ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.tealAccent[700],
-                ),
-                child: const Text('eShop kupujte to najlepšie'),
-              ),
-              const DrawerItem(title: "Všetko", size: 22, type: "3"),
-              const Divider(
-                thickness: 2,
-              ),
-              const DrawerItem(title: "Men", size: 18, type: "1"),
-              const DrawerItem(title: "Womans", size: 18, type: "2"),
-              const DrawerItem(title: "Children", size: 18, type: "3"),
-              const Divider(
-                thickness: 2,
-              ),
-              const DrawerItem(title: "Tenisky", size: 16, type: "3"),
-              const DrawerItem(title: "Tričká", size: 16, type: "3"),
-              const DrawerItem(title: "Legíny", size: 16, type: "3"),
-              const DrawerItem(title: "Rifle", size: 16, type: "3"),
-              const DrawerItem(title: "Tepláky", size: 16, type: "3"),
-              const DrawerItem(title: "Šaty", size: 16, type: "3"),
-            ],
-          ),
+        bottomNavigationBar: BottomNavigationBar(
+          unselectedItemColor: Colors.black,
+          selectedItemColor: Colors.teal,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.view_module_rounded),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.child_care),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: '',
+            ),
+          ],
+          currentIndex: 0,
         ),
       ),
     );
@@ -177,20 +139,24 @@ class HeaderCard extends StatelessWidget {
           child: Column(
             children: [
               CircleAvatar(
-                radius: 45,
+                radius: 39,
                 backgroundColor: Colors.tealAccent[700],
                 child: ClipOval(
                   child: Image.asset(
                     'assets/files/' + img + '.png',
                     fit: BoxFit.cover,
-                    width: 80,
-                    height: 80,
+                    width: 70,
+                    height: 70,
                   ),
                 ),
               ),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 17),
+              Container(
+                padding: const EdgeInsets.all(5),
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                      fontSize: 17, fontWeight: FontWeight.w500),
+                ),
               ),
             ],
           ),
