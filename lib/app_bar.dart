@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'cart_page.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   bool showActions;
@@ -29,21 +28,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             icon: const Icon(Icons.search),
             tooltip: 'Search products',
             onPressed: () {},
-          ),
-        if (showActions)
-          IconButton(
-            icon: const Icon(Icons.shopping_cart),
-            tooltip: 'Show shopping cart',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute<CartPage>(
-                  builder: (BuildContext context) => const CartPage(
-                    planetDetail: {"name": "Test"},
-                  ),
-                ),
-              );
-            },
           ),
       ],
     );

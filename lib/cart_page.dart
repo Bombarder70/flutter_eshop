@@ -7,9 +7,7 @@ import 'detail_page.dart';
 import 'get_cart_id.dart';
 
 class CartPage extends StatefulWidget {
-  final Map planetDetail;
-
-  const CartPage({Key? key, required this.planetDetail}) : super(key: key);
+  const CartPage({Key? key}) : super(key: key);
   @override
   State<StatefulWidget> createState() => CartPageState();
 }

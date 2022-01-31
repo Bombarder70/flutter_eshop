@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
-import 'product.dart';
-import 'get_cart_id.dart';
+import 'cart_page.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({Key? key}) : super(key: key);
@@ -11,66 +8,28 @@ class CustomBottomNavigationBar extends StatefulWidget {
 }
 
 class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
-  @override
-  void initState() {
-    super.initState();
-    getCartId(_loadData);
-  }
+  int _selectedIndex = 0;
 
-  //List<dynamic> _products = [];
-  String nextPage = "";
-  int loadedPage = 1;
-
-  List<Result> _allProducts = [];
-  double cenaSpolu = 0;
-
-  void _removeItem(String id) {
-    setState(() => _allProducts.removeWhere((item) => item.id == id));
-  }
-
-  void _placeOrder() {
-    getCartIdPlaceOrder(_placeOrderHttp);
-    setState(() {
-      _allProducts = [];
-    });
-  }
-
-  void _placeOrderHttp(String idCart) async {
-    var res = await http.post(
-      Uri.parse(
-          'http://10.0.2.2/holes/dia_eshop/web/Admin/index.php?action=objednat'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: convert.jsonEncode(
-        <String, String>{'id_cart': idCart},
-      ),
-    );
-
-    print(res.body);
-  }
-
-  void _loadData(String cartId) async {
-    var url = Uri(
-      scheme: "http",
-      host: "10.0.2.2",
-      path: "/holes/dia_eshop/web/Admin/index.php",
-      queryParameters: {"action": "kosik", "cart_id": cartId},
-    );
-
-    var res = await http.get(url);
-    var json = convert.jsonDecode(res.body) as Map<String, dynamic>;
-
-    var products;
-
-    if (json['results'] != null) {
-      products = Product.fromJson(json);
+  void _onItemTapped(int index) {
+    switch (index) {
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute<CartPage>(
+            builder: (BuildContext context) => const CartPage(),
+          ),
+        );
+        break;
+      case 3:
+        break;
     }
 
-    String xxx;
-
     setState(() {
-      xxx = "xxx";
+      _selectedIndex = index;
     });
   }
 
@@ -79,25 +38,26 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     return BottomNavigationBar(
       unselectedItemColor: Colors.black,
       selectedItemColor: Colors.teal,
+      onTap: _onItemTapped,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: '',
+          label: 'Explore',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.view_module_rounded),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.child_care),
-          label: '',
+          label: 'Catalog',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart),
-          label: '',
+          label: 'My cart',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.child_care),
+          label: 'Profile',
         ),
       ],
-      currentIndex: 0,
+      currentIndex: _selectedIndex,
     );
   }
 }
