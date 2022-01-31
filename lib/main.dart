@@ -33,34 +33,7 @@ class MyApp extends StatelessWidget {
                 HeaderCard(title: "Children", img: "child2", type: "3"),
               ],
             ),
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    "Categories",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                      "All",
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            RowItem(title: "Categories", img: "men", type: "1"),
             SizedBox(
               height: 95.0,
               child: Container(
@@ -78,6 +51,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
+            RowItem(title: "Best selling", img: "men", type: "1"),
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
@@ -252,6 +226,51 @@ class CategoryCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class RowItem extends StatelessWidget {
+  final String title;
+  final String img;
+  final String type;
+
+  const RowItem({
+    Key? key,
+    required this.title,
+    required this.img,
+    required this.type,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(10),
+            child: Text(
+              "All",
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
