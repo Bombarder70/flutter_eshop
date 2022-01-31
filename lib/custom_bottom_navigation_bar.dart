@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'cart_page.dart';
+import 'specific_page.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({Key? key}) : super(key: key);
@@ -15,6 +16,12 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       case 0:
         break;
       case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute<SecondPage>(
+            builder: (BuildContext context) => const SecondPage(type: '3'),
+          ),
+        );
         break;
       case 2:
         Navigator.push(
@@ -23,8 +30,6 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             builder: (BuildContext context) => const CartPage(),
           ),
         );
-        break;
-      case 3:
         break;
     }
 
@@ -51,10 +56,6 @@ class CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart),
           label: 'My cart',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.child_care),
-          label: 'Profile',
         ),
       ],
       currentIndex: _selectedIndex,
