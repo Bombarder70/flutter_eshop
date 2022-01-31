@@ -206,9 +206,7 @@ class DetailPageState extends State<DetailPage> {
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute<CartPage>(
-                        builder: (BuildContext context) => const CartPage(
-                          planetDetail: {"name": "Test"},
-                        ),
+                        builder: (BuildContext context) => const CartPage(),
                       ),
                     ),
                     child: const Text('Show cart'),
