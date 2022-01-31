@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: CustomAppBar(),
-        body: ListView(
+        body: Column(
           children: [
             Row(
               children: [
@@ -61,46 +61,34 @@ class MyApp extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
-              height: 200,
-              margin: EdgeInsets.only(left: 2, right: 2, top: 20, bottom: 20),
-              child: FittedBox(
-                child: Image.network(
-                    'https://image.freepik.com/psd-gratuitas/modelo-de-banner-com-design-de-compras-online_23-2148550895.jpg'),
-                fit: BoxFit.fill,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 3), // changes position of shadow
-                  ),
-                ],
+            SizedBox(
+              height: 95.0,
+              child: Container(
+                alignment: Alignment.topCenter,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  children: [
+                    CategoryCard(title: "Men", img: "men", type: "1"),
+                    CategoryCard(title: "Men", img: "men", type: "1"),
+                    CategoryCard(title: "Men", img: "men", type: "1"),
+                    CategoryCard(title: "Men", img: "men", type: "1"),
+                    CategoryCard(title: "Men", img: "men", type: "1"),
+                  ],
+                ),
               ),
             ),
-            Container(
-              height: 200,
-              margin: EdgeInsets.only(left: 2, right: 2, top: 20, bottom: 20),
-              child: FittedBox(
-                child: Image.network(
-                    'https://image.freepik.com/free-psd/online-shopping-banner-design_23-2148552605.jpg'),
-                fit: BoxFit.fill,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 3), // changes position of shadow
-                  ),
-                ],
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (ctx, int) {
+                  return Card(
+                    child: ListTile(
+                      title: Text('Motivation $int'),
+                      subtitle: Text('this is a description of the motivation'),
+                    ),
+                  );
+                },
               ),
             ),
           ],
@@ -187,58 +175,83 @@ class HeaderCard extends StatelessWidget {
   }
 }
 
-class AllCategoriesCard extends StatelessWidget {
-  final String image;
-
-  const AllCategoriesCard({Key? key, required this.image}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        height: 85,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(40.0),
-            topRight: Radius.circular(40.0),
-          ),
-          color: Colors.grey[350],
-        ),
-        padding: const EdgeInsets.all(5),
-        margin: const EdgeInsets.all(5),
-        child: Image.network(image),
-      ),
-    );
-  }
-}
-
-class DrawerItem extends StatelessWidget {
+class CategoryCard extends StatelessWidget {
   final String title;
-  final double size;
+  final String img;
   final String type;
 
-  const DrawerItem({
+  const CategoryCard({
     Key? key,
     required this.title,
-    required this.size,
+    required this.img,
     required this.type,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        title,
-        style: TextStyle(fontSize: size),
-      ),
-      onTap: () {
-        Navigator.push(
+    return Expanded(
+      child: InkWell(
+        onTap: () => Navigator.push(
           context,
           MaterialPageRoute<SecondPage>(
             builder: (BuildContext context) => SecondPage(type: type),
           ),
-        );
-      },
+        ),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                alignment: Alignment.center,
+                height: 75,
+                width: 75,
+                margin: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Expanded(
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(11.0),
+                                image: DecorationImage(
+                                  colorFilter: ColorFilter.mode(
+                                      Colors.teal.withOpacity(0.5),
+                                      BlendMode.dstATop),
+                                  image: const NetworkImage(
+                                    "http://10.0.2.2/holes/dia_eshop/files/products/shoes.png",
+                                  ),
+                                  //fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned.fill(
+              child: Container(
+                alignment: Alignment.center,
+                child: Text(
+                  "Shoes",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
