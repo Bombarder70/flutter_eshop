@@ -5,6 +5,7 @@ import 'package:flutter/painting.dart';
 import 'specific_page.dart';
 import 'app_bar.dart';
 import 'get_cart_id.dart';
+import 'custom_bottom_navigation_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -67,29 +68,7 @@ class MyApp extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          unselectedItemColor: Colors.black,
-          selectedItemColor: Colors.teal,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.view_module_rounded),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.child_care),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              label: '',
-            ),
-          ],
-          currentIndex: 0,
-        ),
+        bottomNavigationBar: const CustomBottomNavigationBar(),
       ),
     );
   }
@@ -196,7 +175,7 @@ class CategoryCard extends StatelessWidget {
                                       Colors.teal.withOpacity(0.5),
                                       BlendMode.dstATop),
                                   image: const NetworkImage(
-                                    "http://10.0.2.2/holes/dia_eshop/files/products/shoes.png",
+                                    "http://10.0.2.2/holes/dia_eshop/files/products/shoes_1.png",
                                   ),
                                   //fit: BoxFit.cover,
                                 ),
