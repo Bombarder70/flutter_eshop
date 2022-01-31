@@ -135,63 +135,55 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            _allProducts.isNotEmpty
-                ? GridView.builder(
-                    controller: _controller,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 250,
-                      childAspectRatio: 3 / 4.25,
-                      crossAxisSpacing: 0,
-                      mainAxisSpacing: 0,
-                    ),
-                    itemCount: _allProducts.length,
-                    itemBuilder: (context, index) {
-                      return Stack(
-                        alignment: AlignmentDirectional.center,
-                        children: [
-                          ProductCard(productDetail: _allProducts[index]),
-                          if (int.parse(_allProducts[index].discount) > 0)
-                            Positioned(
-                              top: 10,
-                              left: 10,
-                              child: Container(
-                                child:
-                                    (int.parse(_allProducts[index].count) > 0)
-                                        ? Text(
-                                            "-" +
-                                                _allProducts[index].discount +
-                                                "%",
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          )
-                                        : const Text(
-                                            "Unavailable",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color:
-                                      (int.parse(_allProducts[index].count) > 0)
-                                          ? Colors.teal
-                                          : Colors.red[900],
+            GridView.builder(
+              controller: _controller,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 250,
+                childAspectRatio: 3 / 4.25,
+                crossAxisSpacing: 0,
+                mainAxisSpacing: 0,
+              ),
+              itemCount: _allProducts.length,
+              itemBuilder: (context, index) {
+                return Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: [
+                    ProductCard(productDetail: _allProducts[index]),
+                    if (int.parse(_allProducts[index].discount) > 0)
+                      Positioned(
+                        top: 10,
+                        left: 10,
+                        child: Container(
+                          child: (int.parse(_allProducts[index].count) > 0)
+                              ? Text(
+                                  "-" + _allProducts[index].discount + "%",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              : const Text(
+                                  "Unavailable",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ),
-                        ],
-                      );
-                    },
-                  )
-                : Image.network(
-                    "https://i.pinimg.com/originals/2c/bb/5e/2cbb5e95b97aa2b496f6eaec84b9240d.gif"),
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: (int.parse(_allProducts[index].count) > 0)
+                                ? Colors.teal
+                                : Colors.red[900],
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              },
+            )
           ],
         ),
       ),
