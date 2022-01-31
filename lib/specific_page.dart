@@ -16,21 +16,26 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
-  ScrollController controller = ScrollController();
   int currentPage = 1;
+  ScrollController _controller = ScrollController();
 
   @override
   void initState() {
     super.initState();
     // Nastav na najnovsie
     _loadData(widget.type, "id", "desc", "false", "1");
-    controller.addListener(handleScrolling);
-  }
 
-  void handleScrolling() {
-    if (controller.offset >= controller.position.maxScrollExtent) {
-      _loadAnotherData(currentPage + 1);
-    }
+    _controller.addListener(() {
+      //final rate = _controller.offset / _controller.position.maxScrollExtent;
+      /*if (widget.threshold <= rate) {
+        widget.loadNext();
+      }*/
+
+      if (_controller.offset >= _controller.position.maxScrollExtent) {
+        _loadAnotherData(currentPage + 1);
+        print(1);
+      }
+    });
   }
 
   void _loadAnotherData(int page) {
@@ -77,6 +82,7 @@ class _SecondPageState extends State<SecondPage> {
       path: "/holes/dia_eshop/web/Admin/index.php",
       queryParameters: {
         "action": "vsetky_produkty",
+        "page": page,
         "type": type,
         "orderName": orderName,
         "orderBy": orderBy,
@@ -131,7 +137,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
             _allProducts.isNotEmpty
                 ? GridView.builder(
-                    controller: controller,
+                    controller: _controller,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     gridDelegate:
